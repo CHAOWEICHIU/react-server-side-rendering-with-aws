@@ -20,15 +20,13 @@ import { StaticRouter } from 'react-router'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import reducers from './reducers'
-
-
 const initState = {user:'wayne', login:true}
 const store = createStore(reducers, initState)
 const preloadedState = store.getState()
 
 import App from './components/app'
 
-app.get('/*', (req, res)=>{
+app.get('*', (req, res)=>{
   const context = {}
   console.log('context:',context,'req.url', req.url);
   const html = renderToString(
@@ -38,7 +36,6 @@ app.get('/*', (req, res)=>{
       </StaticRouter>
     </Provider>
   )
-
   res.send(renderFullPage({html, preloadedState}))
 })
 
@@ -57,8 +54,6 @@ const renderFullPage = ({html,preloadedState}) => (`
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
         </script>
         <script src="/static/bundle.js"></script>
-
-
       </body>
     </html>
 `)

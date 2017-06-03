@@ -10,7 +10,7 @@ const Counter = (props) => {
     <br />
     <button onClick={()=>UP()}>UP</button>
     <br />
-    <button onClick={()=>DOWN()}>DOWN</button>
+    <button onClick={()=>DOWN()}>DOWNEEEE</button>
   </div>)
 }
 
