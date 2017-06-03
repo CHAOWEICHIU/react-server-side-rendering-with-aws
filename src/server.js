@@ -6,7 +6,6 @@ import path from 'path'
 const app = express()
     , PORT = 8888
 
-console.log(path.join(__dirname, '../static'))
 app.use('/static',express.static(path.join(__dirname, '../static')))
 
 app.listen(PORT,(err)=>{
@@ -49,14 +48,20 @@ const preloadedState = store.getState()
 
 import App from './components/app'
 
-app.get('/', (req, res)=>{
+app.get('/*', (req, res)=>{
+  const context = {}
+  console.log('context:',context,'req.url', req.url);
   const html = renderToString(
     <Provider store={store}>
-      <App />
+      <StaticRouter location={req.url} context={context}>
+        <App />
+      </StaticRouter>
     </Provider>
   )
+
   res.send(renderFullPage({html, preloadedState}))
 })
+
 
 const renderFullPage = ({html,preloadedState}) => (`
     <!doctype html>
@@ -71,7 +76,9 @@ const renderFullPage = ({html,preloadedState}) => (`
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
         </script>
-        <script type="javascript" src="/static/bundle.js"></script>
+        <script src="/static/bundle.js"></script>
+
+
       </body>
     </html>
 `)

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./src/server.js --exec babel-node",
-    "build": "rimraf static && webpack -p"
+    "build": "rimraf static && webpack",
+    "serve":"webpack-dev-server --content-base static/"
   },
   "author": "",
   "license": "ISC",
@@ -21,12 +22,14 @@
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
     "redux": "^3.6.0"
   },
   "devDependencies": {
     "babel-loader": "^7.0.0",
     "nodemon": "^1.11.0",
     "rimraf": "^2.6.1",
-    "webpack": "^2.6.1"
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }

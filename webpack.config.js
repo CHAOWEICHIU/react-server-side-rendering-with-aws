@@ -1,6 +1,5 @@
 const webpack = require('webpack')
     , path = require('path')
-    , HtmlWebpackPlugin = require('html-webpack-plugin')
 
 
 module.exports = {
@@ -11,6 +10,12 @@ module.exports = {
     path: path.resolve(__dirname, 'static'),
     filename: '[name].js'
   },
+  devServer: {
+    compress: true,
+    port:8888,
+    stats: {colors:true}
+  },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
