@@ -1,36 +1,57 @@
 import express from 'express'
 const app = express()
-    , PORT = 9000
+    , PORT = 8888
 
 app.get('/', (req,res)=>{
   res.status(200).send('Home Page')
 })
-// import React from 'react'
-// import { renderToString } from 'react-dom/server'
-// import { StaticRouter } from 'react-router'
+app.listen(PORT,(err)=>{
+  if(err) throw err
+  console.log(`listening on port ${PORT}`)
+})
 
-//
-//
-//
-//
-// const App = () => (<div>Food Job</div>)
-//
-// app.get('/', function(req, res){
-//   const context = {}
-//   const html = ReactDOMServer.renderToString(
-//     React.createFactory(App)
-//   )
-//   // const html = `<div>okokokokok</div>`
-//   if(context.url){
-//     res.status(301).send({Location: context.url})
-//   } else {
-//     res
-//     .status(200)
-//     .send(`
-//       <!doctype html>
-//       <div id="app">${html}</div>
-//     `)
-//
-//   }
-//
-app.listen(PORT,()=>console.log(`listening on port ${PORT}`))
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import { StaticRouter } from 'react-router'
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
+import Appp from '../client'
+import template from '../template'
+
+const user = (state='', action) => {
+  switch (action.type) {
+    case 'NAME':
+      return state
+    default:
+      return state
+  }
+}
+const login = (state='', action) => {
+  switch (action.type) {
+    case 'NAME':
+      return state
+    default:
+      return state
+  }
+}
+
+const reducers = combineReducers({
+  user,
+  login,
+})
+
+const preloadState = {user:'wayne', login:true}
+const store = createStore(reducers, preloadState)
+
+
+app.get('/yo', function(req, res){
+  const context = {}
+  const html = template({body:renderToString(React.createElement(Provider,{store},React.createElement(Appp)))})
+  if(context.url){
+    res.status(301).send({Location: context.url})
+  } else {
+    res
+    .status(200)
+    .send(html)
+  }
+})
