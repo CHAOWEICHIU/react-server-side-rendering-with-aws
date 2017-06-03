@@ -6,6 +6,7 @@ import path from 'path'
 const app = express()
     , PORT = 8888
 
+console.log(path.join(__dirname, '../static'))
 app.use('/static',express.static(path.join(__dirname, '../static')))
 
 app.listen(PORT,(err)=>{
@@ -45,7 +46,8 @@ const reducers = combineReducers({
 const initState = {user:'wayne', login:true}
 const store = createStore(reducers, initState)
 const preloadedState = store.getState()
-const App = () => (<div>Apppp</div>)
+
+import App from './components/app'
 
 app.get('/', (req, res)=>{
   const html = renderToString(
@@ -61,14 +63,15 @@ const renderFullPage = ({html,preloadedState}) => (`
     <html>
       <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Redux Universal Example</title>
       </head>
       <body>
-        <div id="root">${html}</div>
+        <div id="container">${html}</div>
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
         </script>
-        <script src="/static/bundle.js"></script>
+        <script type="javascript" src="/static/bundle.js"></script>
       </body>
     </html>
 `)

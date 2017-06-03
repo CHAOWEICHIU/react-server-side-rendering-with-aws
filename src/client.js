@@ -15,10 +15,10 @@ delete window.__PRELOADED_STATE__
 
 // Create Redux store with initial state
 const store = createStore(reducers, preloadedState)
-
+console.log('yo');
 render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('container')
 )

@@ -1,11 +1,11 @@
 const webpack = require('webpack')
     , path = require('path')
+    , HtmlWebpackPlugin = require('html-webpack-plugin')
 
 
 module.exports = {
   entry: {
-    bundle: './src/client.js',
-    vendor: [ 'react', 'react-dom', 'react-redux', 'redux']
+    bundle: './src/client.js'
   },
   output: {
     path: path.resolve(__dirname, 'static'),
@@ -21,8 +21,9 @@ module.exports = {
     ]
   },
   plugins:[
-    new webpack.optimize.CommonsChunkPlugin({
-      name:'vendor'
-    })
+    // new webpack.optimize.UglifyJsPlugin({compress:{warnings: false},sourceMap:true}),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name:'vendor'
+    // })
   ]
 }
