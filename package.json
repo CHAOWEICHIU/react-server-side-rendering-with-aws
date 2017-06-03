@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/server/index.js --exec babel-node"
+    "dev": "nodemon ./src/server.js --exec babel-node",
+    "build":"rimraf static && webpack"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +24,9 @@
     "redux": "^3.6.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "babel-loader": "^7.0.0",
+    "nodemon": "^1.11.0",
+    "rimraf": "^2.6.1",
+    "webpack": "^2.6.1"
   }
 }
