@@ -9,7 +9,7 @@ const user = (state='', action) => {
 }
 const login = (state='', action) => {
   switch (action.type) {
-    case 'NAME':
+    case 'NAMEE':
       return state
     default:
       return state

@@ -8,8 +8,11 @@ const Yes = () => (<div>
 </div>)
 const App = () => (<div>
   <Link to="/ok">ok</Link>
+  <br />
   <Link to="/yes">yes</Link>
+  <br />
   <Link to="/counter">counter</Link>
+  <br />
   <Switch>
     <Route path="/ok" component={Ok}/>
     <Route path="/yes" component={Yes}/>

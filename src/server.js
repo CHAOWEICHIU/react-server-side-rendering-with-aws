@@ -19,28 +19,8 @@ import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
+import reducers from './reducers'
 
-const user = (state='', action) => {
-  switch (action.type) {
-    case 'NAME':
-      return state
-    default:
-      return state
-  }
-}
-const login = (state='', action) => {
-  switch (action.type) {
-    case 'NAME':
-      return state
-    default:
-      return state
-  }
-}
-
-const reducers = combineReducers({
-  user,
-  login,
-})
 
 const initState = {user:'wayne', login:true}
 const store = createStore(reducers, initState)
