@@ -31,7 +31,7 @@ Resources:
         EnvironmentName:    !Ref AWS::StackName
         GitHubRepoName:     react-server-side-rendering-with-aws
         GitHubRepoBranch:   master
-        GitHubUser:         chaoweichiu
+        GitHubUser:         CHAOWEICHIU
         GitHubToken:        !Ref GitHubToken
         CodePipelineRole:   !GetAtt Serucity.Outputs.RoleForCodepipeline
         CloudformationRole: !GetAtt Serucity.Outputs.RoleForCloudformation
