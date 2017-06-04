@@ -3,7 +3,6 @@
   [X] Server Static file to client
     - Cached? => No
   [ ] prop-types
-
   [ ] Create element, parse
 
   [ ] React

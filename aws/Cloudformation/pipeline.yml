@@ -142,7 +142,7 @@ Resources:
               RoleArn:    !Ref CloudformationRole
               ChangeSetName: pipeline-changeset
               Capabilities: CAPABILITY_NAMED_IAM
-              TemplatePath: Artifact::webAppBeta.json
+              TemplatePath: Artifact::betaWeb.yml
             RunOrder: 1
           - Name: execute-changeset
             InputArtifacts: []
