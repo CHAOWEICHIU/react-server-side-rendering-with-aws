@@ -67,6 +67,8 @@ Resources:
             - |
               npm install
             - |
+              npm run build
+            - |
               npm run serve &
 Parameters:
   KeyNameYo:
