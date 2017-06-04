@@ -8,9 +8,9 @@ const Yes = () => (<div>
   <button onClick={()=>console.log('hi')}>Click me</button>
 </div>)
 const App = () => (<div>
-  <Link to="/ok">ok</Link>
+  <Link to="/ok">okkkk</Link>
   <br />
-  <Link to="/yes">yes</Link>
+  <Link to="/yes">yessss</Link>
   <br />
   <Link to="/counter">counter</Link>
   <br />
