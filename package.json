@@ -9,7 +9,7 @@
     "watch:test": "jest --watch",
     "watch:server": "NODE_ENV=development nodemon ./src/server.js --exec babel-node",
     "watch:client": "webpack --watch",
-    "build": "rimraf static && webpack",
+    "build": "rimraf static && webpack -p",
     "line:message": "node ./aws/line_message/send.js",
     "serve":"NODE_ENV=production babel-node ./src/server.js"
   },

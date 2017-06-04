@@ -10,12 +10,6 @@ module.exports = {
     path: path.resolve(__dirname, 'static'),
     filename: '[name].js'
   },
-  devServer: {
-    compress: true,
-    port:8888,
-    stats: {colors:true}
-  },
-  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -26,7 +20,7 @@ module.exports = {
     ]
   },
   plugins:[
-    // new webpack.optimize.UglifyJsPlugin({compress:{warnings: false},sourceMap:true}),
+    new webpack.optimize.UglifyJsPlugin({compress:{warnings: false},sourceMap:true})
     // new webpack.optimize.CommonsChunkPlugin({
     //   name:'vendor'
     // })
