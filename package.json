@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "watch:server": "nodemon ./src/server.js --exec babel-node",
-    "watch:client":"webpack --watch",
+    "watch:client": "webpack --watch",
     "build": "rimraf static && webpack"
   },
   "author": "",
@@ -23,11 +23,21 @@
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "styled-components": "^1.4.6"
   },
   "devDependencies": {
+    "babel-jest": "^20.0.3",
+    "jest-matcher-utils": "^19.0.0",
     "babel-loader": "^7.0.0",
+    "enzyme": "^2.8.2",
+    "enzyme-to-json": "^1.5.1",
+    "jest": "^20.0.4",
+    "jest-snapshot": "^20.0.3",
+    "jest-styled-components": "^2.2.0",
     "nodemon": "^1.11.0",
+    "react-addons-test-utils": "^15.5.1",
+    "react-test-renderer": "^15.5.4",
     "rimraf": "^2.6.1",
     "webpack": "^2.6.1"
   }

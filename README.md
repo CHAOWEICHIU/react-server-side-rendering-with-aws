@@ -1,7 +1,8 @@
 ## TODO list
   [X] [HEAD](https://github.com/nfl/react-helmet)
-  [ ] Server Static file to client
-    - Cached?
+  [X] Server Static file to client
+    - Cached? => No
+  [ ] prop-types
 
   [ ] React Server Side Rendering
   [ ] Create element, parse
@@ -12,4 +13,4 @@
   [ ] React Story Book
 
   [ ] webpack dev middleware
-  [ ] Single Sign On 
+  [ ] Single Sign On
