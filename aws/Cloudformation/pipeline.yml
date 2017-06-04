@@ -171,26 +171,3 @@ Resources:
                 ActionMode: CHANGE_SET_EXECUTE
                 ChangeSetName: pipeline-changeset
               RunOrder: 3
-
-
-
-      # - Name: Deploy
-      #   Actions:
-      #   - Name: create-changeset
-      #     InputArtifacts:
-      #     - Name: !Sub "${EnvironmentName}-BuildArtifact"
-      #     ActionTypeId:
-      #       Category: Deploy
-      #       Owner: AWS
-      #       Version: "1"
-      #       Provider: CloudFormation
-      #     OutputArtifacts: []
-      #     Configuration:
-      #       StackName: !Sub "${EnvironmentName}-serverless-stack"
-      #       ActionMode: CHANGE_SET_REPLACE
-      #       RoleArn: !Ref CloudformationRole
-      #       ChangeSetName: pipeline-changeset
-      #       Capabilities: CAPABILITY_NAMED_IAM
-      #       TemplatePath: !Sub "${EnvironmentName}-BuildArtifact::${SAMOutputFile}"
-      #       TemplateConfiguration: !If [ HasStagingVariables, !Sub "${EnvironmentName}-BuildArtifact::${StagingFile}", "" ]
-      #     RunOrder: 1
