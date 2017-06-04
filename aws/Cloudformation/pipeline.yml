@@ -151,13 +151,13 @@ Resources:
               RunOrder: 1
             - Name: MyApprovalAction
               actionTypeId:
-                category: Approval
-                owner: AWS
-                version: 1
-                provider: Manual
-              inputArtifacts: []
-              outputArtifacts: []
-              runOrder: 2
+                Category: Approval
+                Owner: AWS
+                Version: 1
+                Provider: Manual
+              InputArtifacts: []
+              OutputArtifacts: []
+              RunOrder: 2
             - Name: execute-changeset
               InputArtifacts: []
               OutputArtifacts: []
