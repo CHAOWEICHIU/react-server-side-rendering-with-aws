@@ -1,0 +1,112 @@
+{
+  "Description": "Jenkin Server",
+  "Mappings": {
+    "RegionMap": {
+      "ap-northeast-1": {
+        "32": "ami-afb09dc8"
+      }
+    }
+  },
+  "Resources": {
+    "SGForBasicAccessibility": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "SSH, HTTPS:8080",
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 22,
+            "ToPort": 22,
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 8080,
+            "ToPort": 8080,
+            "CidrIp": "0.0.0.0/0"
+          }
+        ]
+      }
+    },
+    "JenkinInstance": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "AvailabilityZone": "ap-northeast-1a",
+        "ImageId" : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "32"]},
+        "InstanceType": "t2.micro",
+        "SecurityGroups": [
+          {"Ref":"SGForBasicAccessibility"}
+        ],
+        "KeyName": {"Ref":"KeyNameHi"},
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "Jenkins"
+          }
+        ],
+        "UserData": {
+          "Fn::Base64": {
+            "Fn::Join": [
+              "",
+              [
+                "#!/bin/bash \n",
+                "sudo apt-get update \n",
+                "cd /home/ubuntu \n",
+                "wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add - \n",
+                "sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list' \n",
+                "sudo apt-get update \n",
+                "yes | sudo apt-get install jenkins \n",
+                "sudo service jenkins start \n"
+              ]
+            ]
+          }
+        }
+      }
+      }
+    },
+    "Parameters": {
+      "KeyNameHi": {
+        "Type": "AWS::EC2::KeyPair::KeyName",
+        "Description": "Name of an existing EC2 KeyPair to enable SSH access to the instance",
+        "ConstraintDescription": "must be the name of an existing EC2 KeyPair."
+      }
+    },
+    "Outputs":{
+      "URL": {
+        "Description": "Jenkin Server Url",
+        "Value": {
+          "Fn::Join": [
+            "",
+            [
+              "http://",
+              {
+                "Fn::GetAtt": [
+                  "JenkinInstance",
+                  "PublicDnsName"
+                ]
+              },
+              ":8080"
+            ]
+          ]
+        }
+      },
+      "ssh": {
+        "Description": "connection to jenkins server",
+        "Value": {
+          "Fn::Join": [
+            "",
+            [
+              "ssh -i 'tokyo-wayne.pem' ",
+              "ubuntu@",
+              {
+                "Fn::GetAtt": [
+                  "JenkinInstance",
+                  "PublicDnsName"
+                ]
+              }
+            ]
+          ]
+        }
+      }
+    }
+}

@@ -1,0 +1,126 @@
+Description: |
+  Roles
+
+
+Parameters:
+  EnvironmentName:
+    Description: An environment name that will be prefixed to resource names
+    Type: String
+
+
+Resources:
+  RoleForCloudformation:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${EnvironmentName}-cloudformation-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - cloudformation.amazonaws.com
+            Action:
+              - sts:AssumeRole
+
+  CloudFormationRolePolicy:
+    Type: AWS::IAM::Policy
+    DependsOn: RoleForCloudformation
+    Description: Setting IAM policy for the service role for AWS CloudFormation
+    Properties:
+      PolicyName: CloudFormationRolePolicy
+      PolicyDocument:
+        Statement:
+        - Action: ["ec2:*"]
+          Resource: "*"
+          Effect: Allow
+        - Action: ["s3:*"]
+          Resource: "*"
+          Effect: Allow
+        - Action: ["cloudformation:*"]
+          Resource: "*"
+          Effect: Allow
+      Roles: [!Ref RoleForCloudformation]
+
+  RoleForCodepipeline:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${EnvironmentName}-codepipeline-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - codepipeline.amazonaws.com
+            Action:
+              - sts:AssumeRole
+
+  CodePipelineRolePolicy:
+    Type: AWS::IAM::Policy
+    DependsOn: RoleForCodepipeline
+    Description: Setting IAM policy for the service role for AWS CodePipeline
+    Properties:
+      PolicyName: CodePipelineRolePolicy
+      PolicyDocument:
+        Statement:
+        - Action: ["s3:*"]
+          Resource: "*"
+          Effect: Allow
+        - Action: ["codebuild:*"]
+          Resource: "*"
+          Effect: Allow
+        - Action: ["cloudformation:*", "iam:PassRole"]
+          Resource: "*"
+          Effect: Allow
+      Roles: [!Ref RoleForCodepipeline]
+
+  RoleForCodebuild:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${EnvironmentName}-codebuild-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - codebuild.amazonaws.com
+            Action:
+              - sts:AssumeRole
+  CodeBuildRolePolicy:
+    Type: AWS::IAM::Policy
+    DependsOn: RoleForCodebuild
+    Description: Setting IAM policy for the service role for AWS CodeBuild
+    Properties:
+      PolicyName: CodeBuildRolePolicy
+      PolicyDocument:
+        Statement:
+        - Effect: Allow
+          Action: ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]
+          Resource: "*"
+        - Effect: Allow
+          Resource: "*"
+          Action: ["s3:*"]
+        - Effect: Allow
+          Resource: "*"
+          Action: ["kms:GenerateDataKey*", "kms:Encrypt", "kms:Decrypt"]
+        - Effect: Allow
+          Resource: "*"
+          Action: ["sns:SendMessage"]
+      Roles: [!Ref RoleForCodebuild]
+
+
+Outputs:
+  EnvironmentName:
+    Description: StackName
+    Value: !Ref AWS::StackName
+  RoleForCloudformation:
+    Description: role for cloudformation
+    Value: !GetAtt RoleForCloudformation.Arn
+  RoleForCodepipeline:
+    Description: role for codepipeline
+    Value: !GetAtt RoleForCodepipeline.Arn
+  RoleForCodebuild:
+    Description: role for codebuild
+    Value: !GetAtt RoleForCodebuild.Arn

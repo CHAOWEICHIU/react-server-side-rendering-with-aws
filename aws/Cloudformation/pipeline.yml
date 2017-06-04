@@ -1,0 +1,185 @@
+Description: >
+    Pipeline
+
+Parameters:
+  EnvironmentName:
+    Description: An environment name that will be prefixed to resource names
+    Type: String
+  # StagingFile:
+  #   Type: String
+  #   Description: The cloudformation staging file. Leave empty if no staging file is needed.
+  #   Default: beta.json
+  CodeBuildImage:
+    Type: String
+    Default: "aws/codebuild/nodejs:7.0.0"
+    Description: Image used for CodeBuild project.
+  GitHubRepoName:
+    Type: String
+    Description: The GitHub repo name
+  GitHubRepoBranch:
+    Type: String
+    Description: The GitHub repo branch code pipelines should watch for changes on
+    Default: master
+  GitHubUser:
+    Type: String
+    Description: GitHub UserName. This username must have access to the GitHubToken.
+  GitHubToken:
+    NoEcho: true
+    Type: String
+    Description: "Secret. OAuthToken with access to Repo. Long string of characters and digits. Go to https://github.com/settings/tokens"
+  CodePipelineRole:
+    Type: String
+    Description: Role the pipeline will use
+  CloudformationRole:
+    Type: String
+    Description: Role for cloudformation
+  CodeBuildRole:
+    Type: String
+    Description: Role for code build
+Resources:
+  CodeBuildProject:
+    DependsOn: [S3Bucket]
+    Description: Creating AWS CodeBuild project
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Artifacts:
+        Type: CODEPIPELINE
+      Description: !Sub Building stage for ${EnvironmentName}.
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        EnvironmentVariables:
+          - Name: S3_BUCKET
+            Value: !Ref S3Bucket
+        Image: !Ref CodeBuildImage
+        Type: LINUX_CONTAINER
+      Name: !Sub ${EnvironmentName}-build
+      ServiceRole: !Ref CodeBuildRole
+      Source:
+        Type: CODEPIPELINE
+      Tags:
+        - Key: app-name
+          Value: !Ref EnvironmentName
+      TimeoutInMinutes: 5
+  S3Bucket:
+    Description: Creating Amazon S3 bucket for AWS CodePipeline artifacts
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: !Sub ${EnvironmentName}-for-codepipeline
+      VersioningConfiguration:
+        Status: Enabled
+  S3ArtifactBucketPolicy:
+    DependsOn: [S3Bucket]
+    Description: Setting Amazon S3 bucket policy for AWS CodePipeline access
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3Bucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Id: SSEAndSSLPolicy
+        Statement:
+        - Sid: DenyInsecureConnections
+          Effect: Deny
+          Principal: "*"
+          Action: s3:*
+          Resource: !Sub "arn:aws:s3:::${S3Bucket}/*"
+          Condition:
+            Bool:
+              aws:SecureTransport: false
+  ProjectPipeline:
+    DependsOn: [S3Bucket, CodeBuildProject]
+    Description: Creating a deployment pipeline for your project in AWS CodePipeline
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      Name: !Sub ${EnvironmentName}-pipeline
+      RoleArn: !Ref CodePipelineRole
+      ArtifactStore:
+        Type: S3
+        Location: !Ref S3Bucket
+      Stages:
+        - Name: Source
+          Actions:
+          - Name: SourceAction
+            ActionTypeId:
+              Version: 1
+              Category:     Source
+              Owner:        ThirdParty
+              Provider:     GitHub
+            InputArtifacts: []
+            OutputArtifacts:
+              - Name: Source
+            Configuration:
+              Repo:       !Ref GitHubRepoName
+              Branch:     !Ref GitHubRepoBranch
+              OAuthToken: !Ref GitHubToken
+              Owner:      !Ref GitHubUser
+            RunOrder: 1
+        - Name: Build
+          Actions:
+          - Name: BuildAction
+            ActionTypeId:
+              Version:  1
+              Category: Build
+              Owner:    AWS
+              Provider: CodeBuild
+            InputArtifacts:
+              - Name: Source
+            OutputArtifacts:
+              - Name: Artifact
+            Configuration:
+              ProjectName: !Sub ${EnvironmentName}-build
+            RunOrder: 1
+        - Name: Beta
+          Actions:
+          - Name: create-changeset
+            ActionTypeId:
+              Version:  1
+              Category: Deploy
+              Owner:    AWS
+              Provider: CloudFormation
+            InputArtifacts:
+              - Name: Artifact
+            OutputArtifacts: []
+            Configuration:
+              StackName:  !Sub "${EnvironmentName}-serverless-stack"
+              ActionMode: CHANGE_SET_REPLACE
+              RoleArn:    !Ref CloudformationRole
+              ChangeSetName: pipeline-changeset
+              Capabilities: CAPABILITY_NAMED_IAM
+              TemplatePath: Artifact::webAppBeta.json
+            RunOrder: 1
+          - Name: execute-changeset
+            InputArtifacts: []
+            OutputArtifacts: []
+            ActionTypeId:
+              Category:   Deploy
+              Owner:      AWS
+              Version:    1
+              Provider:   CloudFormation
+            Configuration:
+              StackName:  !Sub "${EnvironmentName}-serverless-stack"
+              ActionMode: CHANGE_SET_EXECUTE
+              ChangeSetName: pipeline-changeset
+            RunOrder: 2
+
+
+      # - Name: Deploy
+      #   Actions:
+      #   - Name: create-changeset
+      #     InputArtifacts:
+      #     - Name: !Sub "${EnvironmentName}-BuildArtifact"
+      #     ActionTypeId:
+      #       Category: Deploy
+      #       Owner: AWS
+      #       Version: "1"
+      #       Provider: CloudFormation
+      #     OutputArtifacts: []
+      #     Configuration:
+      #       StackName: !Sub "${EnvironmentName}-serverless-stack"
+      #       ActionMode: CHANGE_SET_REPLACE
+      #       RoleArn: !Ref CloudformationRole
+      #       ChangeSetName: pipeline-changeset
+      #       Capabilities: CAPABILITY_NAMED_IAM
+      #       TemplatePath: !Sub "${EnvironmentName}-BuildArtifact::${SAMOutputFile}"
+      #       TemplateConfiguration: !If [ HasStagingVariables, !Sub "${EnvironmentName}-BuildArtifact::${StagingFile}", "" ]
+      #     RunOrder: 1

@@ -1,0 +1,43 @@
+Description: >
+    Master
+
+Parameters:
+  GitHubToken:
+      Description: An environment name that will be prefixed to resource names
+      Type: String
+
+Resources:
+
+  SGs:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3-ap-northeast-1.amazonaws.com/cf-for-niceday-v2-react-server-side/sgs.yml
+      Parameters:
+        EnvironmentName: !Ref AWS::StackName
+
+  Serucity:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3-ap-northeast-1.amazonaws.com/cf-for-niceday-v2-react-server-side/serucity.yml
+      Parameters:
+        EnvironmentName: !Ref AWS::StackName
+
+  Pipelines:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: [Serucity]
+    Properties:
+      TemplateURL: https://s3-ap-northeast-1.amazonaws.com/cf-for-niceday-v2-react-server-side/pipeline.yml
+      Parameters:
+        EnvironmentName:    !Ref AWS::StackName
+        GitHubRepoName:     react-server-side-rendering-with-aws
+        GitHubRepoBranch:   master
+        GitHubUser:         chaoweichiu
+        GitHubToken:        !Ref GitHubToken
+        CodePipelineRole:   !GetAtt Serucity.Outputs.RoleForCodepipeline
+        CloudformationRole: !GetAtt Serucity.Outputs.RoleForCloudformation
+        CodeBuildRole:      !GetAtt Serucity.Outputs.RoleForCodebuild
+
+Outputs:
+  EnvironmentName:
+    Description: StackName
+    Value: !Ref AWS::StackName

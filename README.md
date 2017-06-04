@@ -4,7 +4,6 @@
     - Cached? => No
   [ ] prop-types
 
-  [ ] React Server Side Rendering
   [ ] Create element, parse
 
   [ ] React

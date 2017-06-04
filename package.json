@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test":"jest",
-    "watch:test":"jest --watch",
+    "test": "jest",
+    "update:s3": "sh aws/sh/update.sh",
+    "watch:test": "jest --watch",
     "watch:server": "nodemon ./src/server.js --exec babel-node",
     "watch:client": "webpack --watch",
-    "build": "rimraf static && webpack"
+    "build": "rimraf static && webpack",
+    "line:message": "node ./aws/line_message/send.js"
   },
   "author": "",
   "license": "ISC",
@@ -26,7 +28,8 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
-    "styled-components": "^1.4.6"
+    "styled-components": "^1.4.6",
+    "superagent": "^3.5.2"
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",

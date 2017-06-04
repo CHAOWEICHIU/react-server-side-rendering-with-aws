@@ -1,0 +1,1 @@
+aws cloudformation deploy --template-file /Users/waynechiu/Desktop/wei-ci-cd/CloudFormation/Prod/webAppProd.yml --stack-name webAppProd-v2 --parameter-overrides KeyNameYo=tokyo-wayne Subnets=subnet-b4bfcdec,subnet-d6f6c4a0 VpcId=vpc-5985ec3d
