@@ -150,7 +150,7 @@ Resources:
                 TemplatePath: 'Artifact::betaWeb.yml'
               RunOrder: 1
             - Name: my-approval-action
-              CctionTypeId:
+              ActionTypeId:
                 Category: Approval
                 Owner: AWS
                 Version: 1
