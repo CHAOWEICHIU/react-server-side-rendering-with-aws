@@ -65,11 +65,11 @@ Resources:
             - |
               cd app
             - |
-              npm install
+              sudo npm install
             - |
-              npm run build
+              sudo npm run build
             - |
-              npm run serve &
+              sudo npm run serve &
 Parameters:
   KeyNameYo:
     Type: 'AWS::EC2::KeyPair::KeyName'
