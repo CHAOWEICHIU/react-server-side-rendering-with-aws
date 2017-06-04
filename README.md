@@ -15,3 +15,4 @@
   - KillByPID: kill PID
   - Redirect: sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 9000
   - ShowAllNodejs: ps ax | grep nodejs
+  - ok
