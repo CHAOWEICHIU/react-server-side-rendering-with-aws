@@ -18,6 +18,5 @@ phases:
       - npm run line:message "Done With Build For r-r2"
 artifacts:
   files:
-    - 'src/**'
-    - 'static/**'
-    - 'package.json'
+    - './aws/Cloudformation/betaWeb.yml'
+  discard-paths: yes
