@@ -67,7 +67,7 @@ Resources:
             - |
               npm install
             - |
-              npm run productionMode &
+              npm run serve &
 Parameters:
   KeyNameYo:
     Type: 'AWS::EC2::KeyPair::KeyName'
