@@ -64,7 +64,7 @@ const Counter = (props) => {
     <CounterTitle>Counter</CounterTitle>
     <CounterNumber>{props.counter}</CounterNumber>
     <StyledBtnContainer>
-      <StyledBtn onClick={()=>UP()}>Increase</StyledBtn>
+      <StyledBtn onClick={()=>UP()}>IncreaseE</StyledBtn>
       <StyledBtn onClick={()=>DOWN()}>Decrease</StyledBtn>
     </StyledBtnContainer>
   </StyledCounterContainer>

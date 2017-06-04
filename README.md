@@ -4,7 +4,6 @@
       - Cached? => No
   - [ ] prop-types
   - [ ] Create element, parse
-  - [ ] React
   - [X] Add CI-CD Tool
   - [ ] React Story Book
   - [ ] Single Sign On
