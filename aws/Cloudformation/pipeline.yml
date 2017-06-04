@@ -92,6 +92,9 @@ Resources:
       ArtifactStore:
         Type: S3
         Location: !Ref S3Bucket
+      DisableInboundStageTransitions:
+        - StageName: Build
+          Reason: "Disabling the transition until integration tests are completed"
       Stages:
         - Name: Source
           Actions:
