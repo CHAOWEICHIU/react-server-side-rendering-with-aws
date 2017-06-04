@@ -4,7 +4,9 @@
 import express from 'express'
 import path from 'path'
 const app = express()
-    , PORT = 8888
+    , isDevEnv = process.env.NODE_ENV == 'development'
+    , isProdEnv = process.env.NODE_ENV == 'production'
+    , PORT = isProdEnv ? 80 : 8888
 
 app.use('/static',express.static(path.join(__dirname, '../static')))
 

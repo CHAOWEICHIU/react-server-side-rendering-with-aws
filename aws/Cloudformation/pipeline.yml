@@ -5,10 +5,6 @@ Parameters:
   EnvironmentName:
     Description: An environment name that will be prefixed to resource names
     Type: String
-  # StagingFile:
-  #   Type: String
-  #   Description: The cloudformation staging file. Leave empty if no staging file is needed.
-  #   Default: beta.json
   CodeBuildImage:
     Type: String
     Default: "aws/codebuild/nodejs:7.0.0"
@@ -44,7 +40,7 @@ Resources:
     Properties:
       Artifacts:
         Type: CODEPIPELINE
-      Description: !Sub Building stage for ${EnvironmentName}.
+      Description: !Sub Building stage for ${EnvironmentName}
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         EnvironmentVariables:
@@ -141,7 +137,7 @@ Resources:
               - Name: Artifact
             OutputArtifacts: []
             Configuration:
-              StackName:  !Sub "${EnvironmentName}-serverless-stack"
+              StackName:  !Sub "${EnvironmentName}-react-stack"
               ActionMode: CHANGE_SET_REPLACE
               RoleArn:    !Ref CloudformationRole
               ChangeSetName: pipeline-changeset
@@ -157,7 +153,7 @@ Resources:
               Version:    1
               Provider:   CloudFormation
             Configuration:
-              StackName:  !Sub "${EnvironmentName}-serverless-stack"
+              StackName:  !Sub "${EnvironmentName}-react-stack"
               ActionMode: CHANGE_SET_EXECUTE
               ChangeSetName: pipeline-changeset
             RunOrder: 2

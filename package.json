@@ -7,10 +7,11 @@
     "test": "jest",
     "update:s3": "sh aws/sh/update.sh",
     "watch:test": "jest --watch",
-    "watch:server": "nodemon ./src/server.js --exec babel-node",
+    "watch:server": "NODE_ENV=development nodemon ./src/server.js --exec babel-node",
     "watch:client": "webpack --watch",
     "build": "rimraf static && webpack",
-    "line:message": "node ./aws/line_message/send.js"
+    "line:message": "node ./aws/line_message/send.js",
+    "serve":"NODE_ENV=production babel-node ./src/server.js"
   },
   "author": "",
   "license": "ISC",
