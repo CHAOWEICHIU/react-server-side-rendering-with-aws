@@ -12,7 +12,7 @@ const App = () => (<div>
   <br />
   <Link to="/yes">yessss</Link>
   <br />
-  <Link to="/counter">counter</Link>
+  <Link to="/counter">counterrr</Link>
   <br />
   <Switch>
     <Route path="/ok" component={Ok}/>
