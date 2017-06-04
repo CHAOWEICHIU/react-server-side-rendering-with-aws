@@ -8,7 +8,7 @@ const Counter = (props) => {
     <p>Counter:</p>
     <div>{props.counter}</div>
     <br />
-    <button onClick={()=>UP()}>UP</button>
+    <button onClick={()=>UP()}>UPP</button>
     <br />
     <button onClick={()=>DOWN()}>DOWNEEEE</button>
   </div>)

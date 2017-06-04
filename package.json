@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/server.js --exec babel-node",
-    "build": "rimraf static && webpack",
-    "serve":"webpack-dev-server --content-base static/"
+    "watch:server": "nodemon ./src/server.js --exec babel-node",
+    "watch:client":"webpack --watch",
+    "build": "rimraf static && webpack"
   },
   "author": "",
   "license": "ISC",
