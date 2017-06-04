@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { UP, DOWN } from '../actions'
+import { UP, DOWN } from '../../actions'
 
 const Counter = (props) => {
   const { UP, DOWN } = props

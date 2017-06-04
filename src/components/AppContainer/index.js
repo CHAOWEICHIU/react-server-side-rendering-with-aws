@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, Switch, Route } from 'react-router-dom'
-import Counter from './counter'
+import Counter from '../Counter'
+
 const Ok = () => (<div>ok</div>)
 const Yes = () => (<div>
   Good Job

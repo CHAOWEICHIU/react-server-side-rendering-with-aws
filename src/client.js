@@ -5,7 +5,7 @@ import { render } from 'react-dom'
 import { createStore } from 'redux'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import App from './components/app'
+import AppContainer from './components/AppContainer'
 import reducers from './reducers'
 
 // Grab the state from a global variable injected into the server-generated HTML
@@ -23,7 +23,7 @@ const store = createStore(reducers, preloadedState, composeEnhancers())
 render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <AppContainer />
     </BrowserRouter>
   </Provider>,
   document.getElementById('container')

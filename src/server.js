@@ -24,7 +24,7 @@ const initState = {user:'wayne', login:true}
 const store = createStore(reducers, initState)
 const preloadedState = store.getState()
 
-import App from './components/app'
+import AppContainer from './components/AppContainer'
 
 app.get('*', (req, res)=>{
   const context = {}
@@ -32,7 +32,7 @@ app.get('*', (req, res)=>{
   const html = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={context}>
-        <App />
+        <AppContainer />
       </StaticRouter>
     </Provider>
   )
