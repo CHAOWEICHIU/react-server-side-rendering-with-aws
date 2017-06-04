@@ -149,11 +149,11 @@ Resources:
                 Capabilities: CAPABILITY_NAMED_IAM
                 TemplatePath: 'Artifact::betaWeb.yml'
               RunOrder: 1
-            - name: MyApprovalAction
+            - Name: MyApprovalAction
               actionTypeId:
                 category: Approval
                 owner: AWS
-                version: '1'
+                version: 1
                 provider: Manual
               inputArtifacts: []
               outputArtifacts: []
