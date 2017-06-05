@@ -1,6 +1,6 @@
 ## TODO list
   - WAIT
-  - [ ] Vender.js VS Bundle.js
+
     - [ ] NPM => prop-types
     - [ ] Create element, parse
     - [ ] [Add Normalize.css](https://necolas.github.io/normalize.css/)
@@ -8,9 +8,9 @@
     - [ ] Single Sign On
 
   - DONE
+    - [X] Vender.js VS Bundle.js
     - [X] [HEAD](https://github.com/nfl/react-helmet)
       - [X] Server Static file to client
-
     - [X] Add CI-CD Tool
     - [X] Webpack For Both development and Production
     - [X] Speend Up Server Side Rendering
