@@ -36,7 +36,9 @@ const config = PRODUCTION
         plugins: [
           ...mutualConfig.plugins,
           new webpack.optimize.UglifyJsPlugin({compress:{warnings: false},sourceMap:true}),
-          new webpack.optimize.CommonsChunkPlugin({name:'vendor'})
+          new webpack.optimize.CommonsChunkPlugin([
+            {name:'vendor', filename:'vender.js'}
+          ])
         ]
       }
     )
