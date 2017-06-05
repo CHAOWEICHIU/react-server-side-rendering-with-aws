@@ -1,20 +1,21 @@
 ## TODO list
   - WAIT
-    - [ ] [Add Normalize.css](https://necolas.github.io/normalize.css/)
+  - [ ] Vender.js VS Bundle.js
     - [ ] NPM => prop-types
     - [ ] Create element, parse
+    - [ ] [Add Normalize.css](https://necolas.github.io/normalize.css/)
     - [ ] React Story Book
     - [ ] Single Sign On
-    - [ ] Vender.js VS Bundle.js
-    - [ ] Speend Up Server Side Rendering
-      - .babelrc
-        - "plugins" : ["transform-react-constant-elements", "transform-react-inline-elements"]
+
   - DONE
     - [X] [HEAD](https://github.com/nfl/react-helmet)
       - [X] Server Static file to client
-        - Cached? => No
+
     - [X] Add CI-CD Tool
     - [X] Webpack For Both development and Production
+    - [X] Speend Up Server Side Rendering
+      - .babelrc
+        - "plugins" : ["transform-react-constant-elements", "transform-react-inline-elements"]
 
 ## Useful AWS EC2 command
   - CheckRunningNode:

@@ -8,11 +8,11 @@ const Yes = () => (<div>
   <button onClick={()=>console.log('hi')}>Click me</button>
 </div>)
 const App = () => (<div>
-  <Link to="/ok">okkkk</Link>
+  <Link to="/ok">ok</Link>
   <br />
-  <Link to="/yes">yessss</Link>
+  <Link to="/yes">yesss</Link>
   <br />
-  <Link to="/counter">counterrr</Link>
+  <Link to="/counter">counter</Link>
   <br />
   <Switch>
     <Route path="/ok" component={Ok}/>

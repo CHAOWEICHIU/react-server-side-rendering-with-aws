@@ -3,6 +3,8 @@
 /* Server Set up */
 import express from 'express'
 import path from 'path'
+import fs from 'fs'
+
 const app = express()
     , isDevEnv = process.env.NODE_ENV == 'development'
     , isProdEnv = process.env.NODE_ENV == 'production'
@@ -15,7 +17,6 @@ const setCacheHeader = (req,res,next) => {
 }
 
 app.use('/static',setCacheHeader,express.static(path.join(__dirname, '../static')))
-
 
 app.listen(PORT,(err)=>{
   if(err) throw err
@@ -37,7 +38,6 @@ import AppContainer from './components/AppContainer'
 
 
 app.get('*',(req, res)=>{
-
   const context = {}
   console.log('context:',context,'req.url', req.url);
   const html = renderToString(
@@ -49,6 +49,9 @@ app.get('*',(req, res)=>{
   )
   res.status(200).send(renderFullPage({html, preloadedState}))
 })
+
+
+
 
 
 const renderFullPage = ({html,preloadedState}) => (`
@@ -66,7 +69,7 @@ const renderFullPage = ({html,preloadedState}) => (`
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
         </script>
-        <script src="/static/bundle.js"></script>
+        ${fs.readdirSync(path.join(__dirname, '../', 'static')).map(filename=>`<script src="/static/${filename}"></script>`).join('')}
       </body>
     </html>
 `)

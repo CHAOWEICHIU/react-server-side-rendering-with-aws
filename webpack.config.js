@@ -1,14 +1,17 @@
-const webpack       = require('webpack')
-    , path          = require('path')
+const webpack               = require('webpack')
+    , path                  = require('path')
+    , WebpackCleanupPlugin  = require('webpack-cleanup-plugin')
     , PRODUCTION    = process.env.NODE_ENV === 'production'
+
 
 const mutualConfig = {
   entry: {
-    bundle: './src/client.js'
+    bundle: './src/client.js',
+    vendor: [ 'superagent', 'react', 'react-dom', 'react-redux', 'redux', 'react-router-dom']
   },
   output: {
     path: path.resolve(__dirname, 'static'),
-    filename: '[name].js'
+    filename: '[name].[chunkhash].js'
   },
   module: {
     rules: [
@@ -33,6 +36,7 @@ const config = PRODUCTION
         plugins: [
           ...mutualConfig.plugins,
           new webpack.optimize.UglifyJsPlugin({compress:{warnings: false},sourceMap:true}),
+          new webpack.optimize.CommonsChunkPlugin({name:'vendor'})
         ]
       }
     )
@@ -43,6 +47,7 @@ const config = PRODUCTION
       {
         plugins: [
           ...mutualConfig.plugins,
+          new WebpackCleanupPlugin()
         ],
         devtool: 'inline-source-map'
       }
