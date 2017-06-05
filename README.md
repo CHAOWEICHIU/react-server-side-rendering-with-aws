@@ -5,12 +5,14 @@
     - [ ] Create element, parse
     - [ ] React Story Book
     - [ ] Single Sign On
+    - [ ] Vender.js VS Bundle.js
 
   - DONE
     - [X] [HEAD](https://github.com/nfl/react-helmet)
       - [X] Server Static file to client
         - Cached? => No
     - [X] Add CI-CD Tool
+    - [X] Webpack For Both development and Production
 
 ## Useful AWS EC2 command
   - CheckRunningNode:
