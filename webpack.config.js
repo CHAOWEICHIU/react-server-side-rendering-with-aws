@@ -10,7 +10,7 @@ const mutualConfig = {
     vendor: [ 'superagent', 'react', 'react-dom', 'react-redux', 'redux', 'react-router-dom']
   },
   output: {
-    path: path.resolve(__dirname, 'static'),
+    path: path.resolve(__dirname, 'static/js'),
     filename: '[name].[chunkhash].js'
   },
   module: {

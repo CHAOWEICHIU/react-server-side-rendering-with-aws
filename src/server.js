@@ -69,7 +69,7 @@ const renderFullPage = ({html,preloadedState}) => (`
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
         </script>
-        ${fs.readdirSync(path.join(__dirname, '../', 'static')).map(filename=>`<script src="/static/${filename}"></script>`).join('')}
+        ${fs.readdirSync(path.join(__dirname, '../', 'static','js')).map(filename=>`<script src="/static/js/${filename}"></script>`).join('')}
       </body>
     </html>
 `)

@@ -13,6 +13,7 @@ const preloadedState = window.__PRELOADED_STATE__
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 // Allow the passed state to be garbage-collected
 delete window.__PRELOADED_STATE__
+delete window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 const isProdctionMode = process.env.NODE_ENV == 'production' ? true : false
 
 const store = isProdctionMode
