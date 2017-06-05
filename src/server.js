@@ -8,7 +8,14 @@ const app = express()
     , isProdEnv = process.env.NODE_ENV == 'production'
     , PORT = isProdEnv ? 80 : 8888
 
-app.use('/static',express.static(path.join(__dirname, '../static')))
+const setCacheHeader = (req,res,next) => {
+  res.setHeader('Cache-Control', 'public, max-age=31557600')
+  res.status(200)
+  next()
+}
+
+app.use('/static',setCacheHeader,express.static(path.join(__dirname, '../static')))
+
 
 app.listen(PORT,(err)=>{
   if(err) throw err
@@ -28,7 +35,9 @@ const preloadedState = store.getState()
 
 import AppContainer from './components/AppContainer'
 
-app.get('*', (req, res)=>{
+
+app.get('*',(req, res)=>{
+
   const context = {}
   console.log('context:',context,'req.url', req.url);
   const html = renderToString(
@@ -38,7 +47,7 @@ app.get('*', (req, res)=>{
       </StaticRouter>
     </Provider>
   )
-  res.send(renderFullPage({html, preloadedState}))
+  res.status(200).send(renderFullPage({html, preloadedState}))
 })
 
 
