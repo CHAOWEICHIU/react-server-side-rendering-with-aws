@@ -6,7 +6,9 @@
     - [ ] React Story Book
     - [ ] Single Sign On
     - [ ] Vender.js VS Bundle.js
-
+    - [ ] Speend Up Server Side Rendering
+      - .babelrc
+        - "plugins" : ["transform-react-constant-elements", "transform-react-inline-elements"]
   - DONE
     - [X] [HEAD](https://github.com/nfl/react-helmet)
       - [X] Server Static file to client

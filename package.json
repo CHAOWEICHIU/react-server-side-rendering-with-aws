@@ -11,7 +11,7 @@
     "watch:client": "NODE_ENV=development webpack --watch",
     "build": "rimraf static && NODE_ENV=production webpack -p",
     "line:message": "node ./aws/line_message/send.js",
-    "serve":"NODE_ENV=production babel-node ./src/server.js"
+    "serve": "NODE_ENV=production babel-node ./src/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -34,11 +34,13 @@
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",
-    "jest-matcher-utils": "^19.0.0",
     "babel-loader": "^7.0.0",
+    "babel-plugin-transform-react-constant-elements": "^6.23.0",
+    "babel-plugin-transform-react-inline-elements": "^6.22.0",
     "enzyme": "^2.8.2",
     "enzyme-to-json": "^1.5.1",
     "jest": "^20.0.4",
+    "jest-matcher-utils": "^19.0.0",
     "jest-snapshot": "^20.0.3",
     "jest-styled-components": "^2.2.0",
     "nodemon": "^1.11.0",
