@@ -9,6 +9,10 @@
 
   - DONE
     - [X] Vender.js VS Bundle.js
+    - [X]
+      - [react-helmet](https://github.com/nfl/react-helmet)
+      - [react-helmet-example](https://github.com/mattdennewitz/react-helmet-example/blob/master/components/About.js)
+
     - [X] [HEAD](https://github.com/nfl/react-helmet)
       - [X] Server Static file to client
     - [X] Add CI-CD Tool

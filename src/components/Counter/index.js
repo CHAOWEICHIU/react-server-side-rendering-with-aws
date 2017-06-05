@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { UP, DOWN } from '../../actions'
 import styled from 'styled-components'
-
+import Helmet from 'react-helmet'
 const TopContainer = styled.div`
   display:flex;
   flex-direction:row;
@@ -60,6 +60,7 @@ const Counter = (props) => {
   const { UP, DOWN } = props
   return (
 <TopContainer>
+  <Helmet title="counter" meta={[{property: 'og:title', content: 'counter'}]}/>
   <StyledCounterContainer>
     <CounterTitle>Counter</CounterTitle>
     <CounterNumber>{props.counter}</CounterNumber>
