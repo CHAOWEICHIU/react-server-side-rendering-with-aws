@@ -4,5 +4,8 @@
     "stage-2",
     "react"
   ],
-  "plugins" : ["transform-react-constant-elements", "transform-react-inline-elements"]
+  "plugins" : [
+    "transform-react-constant-elements",
+    "transform-react-inline-elements"
+  ]
 }

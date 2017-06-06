@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, Switch, Route } from 'react-router-dom'
 import LinksContainer from '../LinksContainer'
 import Counter from '../Counter'
+import 'normalize.css'
 
 const Ok = () => (<div>ok</div>)
 const Yes = () => (<div>

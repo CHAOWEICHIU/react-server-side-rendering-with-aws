@@ -8,7 +8,7 @@ import fs from 'fs'
 const app = express()
     , isDevEnv = process.env.NODE_ENV == 'development'
     , isProdEnv = process.env.NODE_ENV == 'production'
-    , PORT = isProdEnv ? 80 : 9999
+    , PORT = isProdEnv ? 80 : 8888
 
 const setCacheHeader = (req,res,next) => {
   res.setHeader('Cache-Control', 'public, max-age=31557600')
@@ -35,9 +35,6 @@ const initState = {user:'wayne', login:true}
 const store = createStore(reducers, initState)
 const preloadedState = store.getState()
 
-
-
-
 app.get('*',(req, res)=>{
   const context = {}
   console.log('context:',context,'req.url', req.url);
@@ -52,13 +49,6 @@ app.get('*',(req, res)=>{
 })
 
 
-fs
-.readdirSync(path.join(__dirname, '../', 'static','js'))
-
-.map(filename=>`<script src="/static/js/${filename}"></script>`)
-
-.join('')
-
 const renderFullPage = ({html,preloadedState}) => (`
     <!doctype html>
     <html>
@@ -66,7 +56,11 @@ const renderFullPage = ({html,preloadedState}) => (`
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="data:image/x-icon;base64,AAABAAEAEBACAAAAAACwAAAAFgAAACgAAAAQAAAAIAAAAAEAAQAAAAAAQAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAPv/AAAAAAADwAAAD/AAABw4AAA73AAAN+wAAHfuAAB//gAAeZ4AAHmeAAA//AAAP/wAAB/4AAAP8AAAA8AAAAAAAAD8PwAA8A8AAOAHAADAAwAAgAEAAIABAAAAAAAAAAAAAAAAAAAAAAAAgAEAAIABAADAAwAA4AcAAPAPAAD8PwAA" rel="icon" type="image/x-icon" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+        ${fs
+          .readdirSync(path.join(__dirname, '../', 'static','css'))
+          .map(filename=>`<link rel="stylesheet" type="text/css" href="/static/css/${filename}">`)
+          .join('')
+          }
         <title>Redux Universal Example</title>
         <style>
           .elementToFadeOut {
@@ -89,7 +83,8 @@ const renderFullPage = ({html,preloadedState}) => (`
           .readdirSync(path.join(__dirname, '../', 'static','js'))
           .map(filename=>`<script src="/static/js/${filename}"></script>`)
           .reverse()
-          .join('')}
+          .join('')
+          }
         <script>
           var fn = function(){
             document.getElementById("container").className="elementToFadeOut"

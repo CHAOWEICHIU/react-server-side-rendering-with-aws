@@ -7,11 +7,11 @@
     "test": "jest",
     "update:s3": "sh aws/sh/update.sh",
     "watch:test": "jest --watch",
-    "watch:server": "NODE_ENV=development nodemon ./src/server.js --exec babel-node",
+    "watch:server": "NODE_ENV=development nodemon ./src/server.js --exec babel-node --plugins=css-modules-transform",
     "watch:client": "NODE_ENV=development webpack --watch",
     "build": "rimraf static && NODE_ENV=production webpack -p",
     "line:message": "node ./aws/line_message/send.js",
-    "serve": "NODE_ENV=production babel-node ./src/server.js"
+    "serve": "NODE_ENV=production babel-node ./src/server.js --plugins=css-modules-transform"
   },
   "author": "",
   "license": "ISC",
@@ -21,8 +21,11 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.4",
     "express": "^4.15.3",
+    "extract-text-webpack-plugin": "^2.1.0",
     "node-jsx": "^0.13.3",
+    "normalize.css": "^7.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-helmet": "^5.1.3",
@@ -36,6 +39,7 @@
   "devDependencies": {
     "babel-jest": "^20.0.3",
     "babel-loader": "^7.0.0",
+    "babel-plugin-css-modules-transform": "^1.2.7",
     "babel-plugin-transform-react-constant-elements": "^6.23.0",
     "babel-plugin-transform-react-inline-elements": "^6.22.0",
     "enzyme": "^2.8.2",
