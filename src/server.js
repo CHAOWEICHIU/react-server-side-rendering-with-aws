@@ -8,13 +8,16 @@ import fs from 'fs'
 const app = express()
     , isDevEnv = process.env.NODE_ENV == 'development'
     , isProdEnv = process.env.NODE_ENV == 'production'
-    , PORT = isProdEnv ? 80 : 8888
+    , PORT = isProdEnv ? 80 : 9999
 
 const setCacheHeader = (req,res,next) => {
   res.setHeader('Cache-Control', 'public, max-age=31557600')
   res.status(200)
   next()
 }
+
+
+
 
 app.use('/static',setCacheHeader,express.static(path.join(__dirname, '../static')))
 

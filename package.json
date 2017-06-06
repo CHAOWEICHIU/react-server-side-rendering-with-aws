@@ -7,11 +7,11 @@
     "test": "jest",
     "update:s3": "sh aws/sh/update.sh",
     "watch:test": "jest --watch",
-    "watch:server": "BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon ./src/server.js --exec babel-node --plugins=css-modules-transform,webpack-loaders",
+    "watch:server": "BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon ./src/server.js --exec babel-node --plugins=css-modules-transform",
     "watch:client": "NODE_ENV=development webpack --watch",
     "build": "rimraf static && NODE_ENV=production webpack -p",
     "line:message": "node ./aws/line_message/send.js",
-    "serve": "BABEL_DISABLE_CACHE=1 NODE_ENV=production babel-node ./src/server.js --plugins=css-modules-transform,webpack-loaders"
+    "serve": "BABEL_DISABLE_CACHE=1 NODE_ENV=production babel-node ./src/server.js --plugins=css-modules-transform"
   },
   "author": "",
   "license": "ISC",
