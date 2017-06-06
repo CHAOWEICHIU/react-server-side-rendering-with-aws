@@ -3,11 +3,12 @@
     - [ ] Images For Server side
     - [ ] NPM => prop-types
     - [ ] Create element, parse
-    - [ ] [Add Normalize.css](https://necolas.github.io/normalize.css/)
+
     - [ ] React Story Book
     - [ ] Single Sign On
 
   - DONE
+    - [X] [Add Normalize.css](https://necolas.github.io/normalize.css/)
     - [X] Vender.js VS Bundle.js
     - [X]
       - [react-helmet](https://github.com/nfl/react-helmet)
