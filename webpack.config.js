@@ -10,8 +10,8 @@ const mutualConfig = {
     vendor: [ 'superagent', 'react', 'react-dom', 'react-redux', 'redux', 'react-router-dom']
   },
   output: {
-    path: path.resolve(__dirname, 'static/js'),
-    filename: '[name].[chunkhash].js'
+    path: path.resolve(__dirname, 'static'),
+    filename: 'js/[name].[chunkhash].js'
   },
   module: {
     rules: [
@@ -23,7 +23,10 @@ const mutualConfig = {
     ]
   },
   plugins:[
-    new webpack.DefinePlugin({"process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)})
+    new webpack.DefinePlugin({"process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)}),
+    new webpack.optimize.CommonsChunkPlugin(
+      {name:'vendor', filename:'js/[name].[chunkhash].js', minChunks: Infinity}
+    )
   ]
 }
 
@@ -36,9 +39,6 @@ const config = PRODUCTION
         plugins: [
           ...mutualConfig.plugins,
           new webpack.optimize.UglifyJsPlugin({compress:{warnings: false},sourceMap:true}),
-          new webpack.optimize.CommonsChunkPlugin([
-            {name:'vendor', filename:'vender.js'}
-          ])
         ]
       }
     )

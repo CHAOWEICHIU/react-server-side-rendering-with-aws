@@ -52,8 +52,12 @@ app.get('*',(req, res)=>{
 })
 
 
+fs
+.readdirSync(path.join(__dirname, '../', 'static','js'))
 
+.map(filename=>`<script src="/static/js/${filename}"></script>`)
 
+.join('')
 
 const renderFullPage = ({html,preloadedState}) => (`
     <!doctype html>
@@ -81,7 +85,11 @@ const renderFullPage = ({html,preloadedState}) => (`
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
         </script>
-        ${fs.readdirSync(path.join(__dirname, '../', 'static','js')).map(filename=>`<script src="/static/js/${filename}"></script>`).join('')}
+        ${fs
+          .readdirSync(path.join(__dirname, '../', 'static','js'))
+          .map(filename=>`<script src="/static/js/${filename}"></script>`)
+          .reverse()
+          .join('')}
         <script>
           var fn = function(){
             document.getElementById("container").className="elementToFadeOut"
