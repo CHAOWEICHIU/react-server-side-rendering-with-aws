@@ -1,12 +1,10 @@
 ## TODO list
   - WAIT
-    - [ ] Images For Server side
     - [ ] NPM => prop-types
-    - [ ] Create element, parse
-
     - [ ] React Story Book
     - [ ] Single Sign On
-
+    - [ ] Images For Server side
+    
   - DONE
     - [X] [Add Normalize.css](https://necolas.github.io/normalize.css/)
     - [X] Vender.js VS Bundle.js

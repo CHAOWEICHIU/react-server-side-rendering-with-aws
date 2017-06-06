@@ -18,7 +18,7 @@ const isProdctionMode = process.env.NODE_ENV == 'production' ? true : false
 
 const store = isProdctionMode
                   ? createStore(reducers)
-                  : (createStore(reducers, composeEnhancers()))
+                  : (createStore(reducers, preloadedState,composeEnhancers()))
 
 if(!isProdctionMode){
   console.log('isProdctionMode:', isProdctionMode);

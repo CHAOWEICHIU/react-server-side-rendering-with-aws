@@ -1,9 +1,9 @@
 'use strcit'
 
 /* Server Set up */
-import express from 'express'
-import path from 'path'
-import fs from 'fs'
+import express  from 'express'
+import path     from 'path'
+import fs       from 'fs'
 
 const app = express()
     , isDevEnv = process.env.NODE_ENV == 'development'
@@ -15,9 +15,6 @@ const setCacheHeader = (req,res,next) => {
   res.status(200)
   next()
 }
-
-
-
 
 app.use('/static',setCacheHeader,express.static(path.join(__dirname, '../static')))
 
@@ -34,9 +31,9 @@ import { createStore, combineReducers } from 'redux'
 import { Provider }                     from 'react-redux'
 import reducers                         from './reducers'
 import AppContainer                     from './containers/AppContainer'
-const initState = {user:'wayne', login:true}
-const store = createStore(reducers, initState)
-const preloadedState = store.getState()
+const initState                         = {user:'wayne'}
+const store                             = createStore(reducers, initState)
+const preloadedState                    = store.getState()
 
 app.get('*',(req, res)=>{
   const context = {}
