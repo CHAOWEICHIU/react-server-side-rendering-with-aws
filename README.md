@@ -1,6 +1,6 @@
 ## TODO list
   - WAIT
-
+    - [ ] Images For Server side
     - [ ] NPM => prop-types
     - [ ] Create element, parse
     - [ ] [Add Normalize.css](https://necolas.github.io/normalize.css/)

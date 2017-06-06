@@ -1,12 +1,12 @@
 'use strcit'
 
-import React from 'react'
-import { render } from 'react-dom'
-import { createStore } from 'redux'
-import { BrowserRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import AppContainer from './components/AppContainer'
-import reducers from './reducers'
+import React                from 'react'
+import { render }           from 'react-dom'
+import { createStore }      from 'redux'
+import { BrowserRouter }    from 'react-router-dom'
+import { Provider }         from 'react-redux'
+import AppContainer         from './containers/AppContainer'
+import reducers             from './reducers'
 
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__

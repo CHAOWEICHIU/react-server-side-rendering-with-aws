@@ -1,8 +1,11 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { UP, DOWN } from '../../actions'
-import styled from 'styled-components'
-import Helmet from 'react-helmet'
+'use strcit'
+
+import React          from 'react'
+import { connect }    from 'react-redux'
+import { UP, DOWN }   from '../../actions'
+import styled         from 'styled-components'
+import Helmet         from 'react-helmet'
+
 const TopContainer = styled.div`
   display:flex;
   flex-direction:row;

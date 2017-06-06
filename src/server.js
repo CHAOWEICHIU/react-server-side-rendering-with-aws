@@ -8,7 +8,7 @@ import fs from 'fs'
 const app = express()
     , isDevEnv = process.env.NODE_ENV == 'development'
     , isProdEnv = process.env.NODE_ENV == 'production'
-    , PORT = isProdEnv ? 80 : 8888
+    , PORT = isProdEnv ? 80 : 9999
 
 const setCacheHeader = (req,res,next) => {
   res.setHeader('Cache-Control', 'public, max-age=31557600')
@@ -24,17 +24,18 @@ app.listen(PORT,(err)=>{
 })
 
 /* React Server Side Rendering */
-import React from 'react'
-import { renderToString } from 'react-dom/server'
-import { StaticRouter } from 'react-router'
+import React                            from 'react'
+import { renderToString }               from 'react-dom/server'
+import { StaticRouter }                 from 'react-router'
 import { createStore, combineReducers } from 'redux'
-import { Provider } from 'react-redux'
-import reducers from './reducers'
+import { Provider }                     from 'react-redux'
+import reducers                         from './reducers'
+import AppContainer                     from './containers/AppContainer'
 const initState = {user:'wayne', login:true}
 const store = createStore(reducers, initState)
 const preloadedState = store.getState()
 
-import AppContainer from './components/AppContainer'
+
 
 
 app.get('*',(req, res)=>{
