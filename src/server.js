@@ -35,7 +35,7 @@ import { createStore, combineReducers } from 'redux'
 import { Provider }                     from 'react-redux'
 import reducers                         from './reducers'
 import AppContainer                     from './containers/AppContainer'
-const initState                         = {user:'wayne'}
+const initState                         = {}
 const store                             = createStore(reducers, initState)
 const preloadedState                    = store.getState()
 
