@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Loader /> 1`] = `
+.cMStMu {
+  align-self: center;
+  -ms-flex-item-align: center;
+  -webkit-align-self: center;
+  margin-top: 100px;
+  border: 12px solid #055877;
+  border-right-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  animation: iECmZH 1s ease-in-out infinite;
+  -webkit-animation: iECmZH 1s ease-in-out infinite;
+}
+
+<div
+  className="cMStMu"
+/>
+`;
