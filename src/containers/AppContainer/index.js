@@ -1,5 +1,6 @@
 import React                          from 'react'
 import { Link, Switch, Route }        from 'react-router-dom'
+import { Redirect }                   from 'react-router'
 import { connect }                    from 'react-redux'
 import 'normalize.css'
 
@@ -12,8 +13,21 @@ import Counter                        from '../Counter'
 
 const OkContainer = (props) => {
   return (<div>
-  <button onClick={()=>props.OK()}>Click</button>
-</div>)}
+    <button onClick={()=>props.OK()}>Click</button>
+  </div>)
+}
+
+const NoMatch =() => (<div>NoMatch</div>)
+
+const isLogin = false
+const RedirectWithStatus = (props) => {
+  return (<Route render={({staticContext})=>{
+      if(staticContext){
+        staticContext.status = props.status
+      }
+      return (<Redirect from={props.from} to={props.to} />)
+  }} />)
+}
 
 
 const Yes = () => (<div>
@@ -23,16 +37,23 @@ const Yes = () => (<div>
 const App = () => (<div>
   <LinksContainer />
   <Switch>
+    <RedirectWithStatus
+      status={301}
+      from="/unknown"
+      to="/ok"
+    />
     <Route path="/ok" component={connect(null,{ OK })(OkContainer)}/>
     <Route path="/yes" component={Yes}/>
     <Route path="/login" component={LoginContainer}/>
+    <Route exact path="/counter" component={()=>{
+      return isLogin
+        ? (<Counter />)
+        : (<Redirect to="/login"/>)
+    }}/>
 
-    <Route path="/counter" component={Counter}/>
+
+    <Route component={NoMatch}/>
   </Switch>
 </div>)
 
 export default App
-// <Route path="/counter" component={Counter}/>
-
-//
-// <Route path="/registor" component={RegistorContainer}/>
