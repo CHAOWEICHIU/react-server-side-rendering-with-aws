@@ -1,5 +1,13 @@
 ## TODO list
   - WAIT
+    - [ ] Route
+      - Styled Input
+      - Login / Logout
+      - POST /api/users
+      - re route if there is token
+        - success => {token: 'aaa.bbb.ccc' }
+        - fail    => {error: 'invalid token'}
+
 
     - [ ] NPM => prop-types
     - [ ] React Story Book

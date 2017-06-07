@@ -13,6 +13,7 @@ import sagas                                      from './sagas'
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState    = window.__PRELOADED_STATE__
 const composeEnhancers  = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const clientToken       = window.sessionStorage.token || ''
 // Allow the passed state to be garbage-collected
 delete window.__PRELOADED_STATE__
 delete window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -24,7 +25,7 @@ if(!isProdctionMode){ console.log('isProdctionMode:', isProdctionMode) }
 const sagaMiddleware = createSagaMiddleware()
 const store = (createStore(
     reducers,
-    preloadedState,
+    Object.assign({}, preloadedState,{token: clientToken}),
     composeEnhancers(applyMiddleware(sagaMiddleware))
 ))
 

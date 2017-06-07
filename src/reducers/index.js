@@ -1,20 +1,10 @@
 import { combineReducers } from 'redux'
-const user = (state='', action) => {
-  switch (action.type) {
-    case 'NAME':
-      return state
-    default:
-      return state
-  }
-}
-const login = (state='', action) => {
-  switch (action.type) {
-    case 'NAMEE':
-      return state
-    default:
-      return state
-  }
-}
+import { reducer as form } from 'redux-form'
+import {
+  GET_TOKEN_SUCCEED,
+  GOT_ERROR_MESSAGE,
+}                          from '../actions'
+
 const counter = (state=0, action) => {
   switch (action.type) {
     case 'up':
@@ -26,10 +16,30 @@ const counter = (state=0, action) => {
   }
 }
 
+const token = (state='', action) => {
+  switch (action.type) {
+    case GET_TOKEN_SUCCEED:
+      return action.token
+    default:
+      return state
+  }
+}
+
+const errors = (state={}, action) => {
+  switch (action.type) {
+    case GOT_ERROR_MESSAGE:
+      return {...state, [action.from]:action.errorMessage}
+    default:
+      return state
+
+  }
+}
+
 const rootReducer = combineReducers({
-  user,
-  login,
-  counter
+  counter,
+  form,
+  token,
+  errors,
 })
 
 export default rootReducer

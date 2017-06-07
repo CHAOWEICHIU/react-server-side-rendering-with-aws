@@ -1,10 +1,14 @@
-import React from 'react'
-import { Link, Switch, Route } from 'react-router-dom'
-import LinksContainer from '../LinksContainer'
-import Counter from '../Counter'
+import React                          from 'react'
+import { Link, Switch, Route }        from 'react-router-dom'
+import { connect }                    from 'react-redux'
 import 'normalize.css'
-import { connect } from 'react-redux'
-import { OK } from '../../actions'
+
+import { OK }                         from '../../actions'
+
+import LinksContainer                 from '../LinksContainer'
+// import RegistorContainer             from '../RegistorContainer'
+import LoginContainer                 from '../LoginContainer'
+import Counter                        from '../Counter'
 
 const OkContainer = (props) => {
   return (<div>
@@ -21,9 +25,14 @@ const App = () => (<div>
   <Switch>
     <Route path="/ok" component={connect(null,{ OK })(OkContainer)}/>
     <Route path="/yes" component={Yes}/>
+    <Route path="/login" component={LoginContainer}/>
+
     <Route path="/counter" component={Counter}/>
   </Switch>
 </div>)
 
 export default App
 // <Route path="/counter" component={Counter}/>
+
+//
+// <Route path="/registor" component={RegistorContainer}/>
