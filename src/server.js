@@ -8,7 +8,11 @@ import fs       from 'fs'
 const app = express()
     , isDevEnv = process.env.NODE_ENV == 'development'
     , isProdEnv = process.env.NODE_ENV == 'production'
-    , PORT = isProdEnv ? 80 : 9999
+    , PORT = process.env.PORT ? process.env.PORT :isProdEnv ? 7777 : 9999
+
+if(isDevEnv){
+  app.use(require('morgan')('dev'))
+}
 
 const setCacheHeader = (req,res,next) => {
   res.setHeader('Cache-Control', 'public, max-age=31557600')
@@ -37,7 +41,6 @@ const preloadedState                    = store.getState()
 
 app.get('*',(req, res)=>{
   const context = {}
-  console.log('context:',context,'req.url', req.url);
   const html = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={context}>

@@ -9,10 +9,11 @@
     "watch:test": "jest --watch",
     "watch:server": "NODE_ENV=development nodemon ./src/server.js --exec babel-node --plugins=css-modules-transform",
     "watch:client": "NODE_ENV=development webpack --watch",
+    "watch:all": "npm run watch:client | npm run watch:server ",
     "build": "rimraf static && NODE_ENV=production webpack -p",
     "line:message": "node ./aws/line_message/send.js",
     "serve": "NODE_ENV=production babel-node ./src/server.js --plugins=css-modules-transform",
-    "go":"npm run build && open http://localhost:5678 | PORT=5678 npm run serve"
+    "go": "npm run build && open http://localhost:5678 | PORT=5678 npm run serve"
   },
   "author": "",
   "license": "ISC",
@@ -51,6 +52,7 @@
     "jest-matcher-utils": "^19.0.0",
     "jest-snapshot": "^20.0.3",
     "jest-styled-components": "^2.2.0",
+    "morgan": "^1.8.2",
     "nodemon": "^1.11.0",
     "react-addons-test-utils": "^15.5.1",
     "react-test-renderer": "^15.5.4",
