@@ -1,12 +1,13 @@
 ## TODO list
   - WAIT
-    - [X] Add Saga
+
     - [ ] NPM => prop-types
     - [ ] React Story Book
     - [ ] Single Sign On
     - [ ] Images For Server side
 
   - DONE
+    - [X] Add Saga
     - [X] [Add Normalize.css](https://necolas.github.io/normalize.css/)
     - [X] Vender.js VS Bundle.js
     - [X]
