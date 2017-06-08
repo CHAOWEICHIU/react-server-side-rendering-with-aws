@@ -129,7 +129,6 @@ const validate = values => {
 const SubmitSucceededPage = () => (<div>Done!</div>)
 const LoginForm = props => {
   const { handleSubmit, invalid, submitting, submitSucceeded } = props
-  console.log(props);
   if(submitSucceeded)return (<SubmitSucceededPage />)
   if(submitting)     return (<Loader />)
   return (<ContainerForForm>
