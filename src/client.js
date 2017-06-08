@@ -5,10 +5,10 @@ import { render }                                 from 'react-dom'
 import { createStore,applyMiddleware,compose }    from 'redux'
 import { BrowserRouter }                          from 'react-router-dom'
 import { Provider }                               from 'react-redux'
-import AppContainer                               from './containers/AppContainer'
-import reducers                                   from './reducers'
 import createSagaMiddleware                       from 'redux-saga'
-import sagas                                      from './sagas'
+import Router                                     from './router'
+import reducers                                   from './lib/reducers'
+import sagas                                      from './lib/sagas'
 
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState    = window.__PRELOADED_STATE__
@@ -34,7 +34,7 @@ sagaMiddleware.run(sagas)
 render(
   <Provider store={store}>
     <BrowserRouter>
-      <AppContainer />
+      <Router />
     </BrowserRouter>
   </Provider>,
   document.getElementById('container')

@@ -1,3 +1,13 @@
+## Layout
+  /aws/             => Code As Infrastructure
+  /src/             => App
+      /pages/       => top level components (entry points)
+      /lib/         => data fetching and transformation helpers
+      /components/  => standalone and "pure" components
+  /test/            => Endpoint Test    
+
+
+
 ## TODO list
   - WAIT
     - [ ] Route
@@ -7,6 +17,7 @@
       - re route if there is token
         - success => {token: 'aaa.bbb.ccc' }
         - fail    => {error: 'invalid token'}
+      - page
 
 
     - [ ] NPM => prop-types

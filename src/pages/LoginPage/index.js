@@ -1,4 +1,4 @@
-import React, { Component }             from 'react'
+import React                            from 'react'
 import { connect }                      from 'react-redux'
 import { reduxForm, Field, FieldArray } from 'redux-form'
 import { Link }                         from 'react-router-dom'
@@ -9,13 +9,15 @@ import Loader                           from '../../components/Loader'
 import {
   GET_TOKEN_SUCCEED,
   GOT_ERROR_MESSAGE,
-}                                       from '../../actions'
+}                                       from '../../lib/actions'
 
+/* Helpers */
+import normalizePhone                   from '../../lib/helpers/normalize_phone'
+const upper = value => value && value.toUpperCase().slice(0, 5)
 
 const Group = styled.div`
   width: 100%;
 `
-
 const FormForInputs = styled.form`
   overflow:auto;
   top:20px;
@@ -40,13 +42,11 @@ const SubmitBtn = styled.button`
   border:none;
   padding: 15px 20px;
 `
-
 const ContainerForForm = styled.div`
   width:100%;
   text-align:center;
   min-height:100%;
 `
-
 const InputField = styled.input`
   border: none;
   padding: 15px 20px;
@@ -58,7 +58,6 @@ const InputField = styled.input`
   outline:none;
   cursor:text;
 `
-
 const InputLabel = styled.label`
   display:block;
   color:#aaa;
@@ -67,7 +66,6 @@ const InputLabel = styled.label`
   text-transform:uppercase;
   margin-bottom: 0px;
 `
-
 const ErrorSpan = styled.span`
   color: #cc2920;
   opacity:0.8;
@@ -86,9 +84,6 @@ const renderInput = field =>{
   </div>)
 }
 
-// normalize helpers
-import normalizePhone                   from '../../helpers/normalize_phone'
-const upper = value => value && value.toUpperCase().slice(0, 5)
 
 const onSubmitSuccess = (res,dispatch) => {
   const token = res.body.token
