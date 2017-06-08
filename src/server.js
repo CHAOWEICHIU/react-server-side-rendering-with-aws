@@ -45,6 +45,7 @@ if(isDevEnv){
 
 /* React Server Side Rendering */
 app.get('*',(req, res)=>{
+  global.staticContext = {status:200}
   const context = {}
   const html = renderToString(
     <Provider store={store}>
@@ -53,7 +54,9 @@ app.get('*',(req, res)=>{
       </StaticRouter>
     </Provider>
   )
-  res.status(200).send(renderFullPage({html, preloadedState}))
+  res
+  .status(global.staticContext.status)
+  .send(renderFullPage({html, preloadedState}))
 })
 
 

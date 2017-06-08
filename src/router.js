@@ -21,21 +21,28 @@ const LinksContainer = () => (<div>
 const RedirectWithStatus = (props) => {
   return (<Route render={({staticContext})=>{
       if(staticContext){
-        console.log('wow');
-        staticContext.status = props.status
+        global.staticContext.status = props.status
       }
       return (<Redirect from={props.from} to={props.to} />)
   }} />)
 }
-const isLogin = true
+const isLogin = false
 const Router = ({token}) => (<div>
   <LinksContainer />
   <Switch>
     <Route path="/home"     component={HomePage}    />
     <Route path="/login"    component={LoginPage}   />
-    <Route path="/Counter"  component={CounterPage} />
 
 
+    {/* Protected Resouces */}
+    <Route path="/counter"  component={()=>{
+      return isLogin
+        ? (<CounterPage />)
+        : (<RedirectWithStatus status={301} from="/counter" to="/login"/>)
+    }} />
+
+    {/* No Match */}
+    <Route component={NoMatch}/>
 
   </Switch>
 </div>)
@@ -55,11 +62,7 @@ export default Router
     ? (<Counter />)
     : (<Redirect to="/login"/>)
 
-    <Route path="/counter"  component={()=>{
-      return isLogin
-        ? (<CounterPage />)
-        : (<RedirectWithStatus status={301} from="/counter" to="/login"/>)
-    }} />
+
 
 
 
