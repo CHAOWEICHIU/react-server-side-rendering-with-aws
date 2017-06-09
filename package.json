@@ -27,6 +27,8 @@
     "email-validator": "^1.0.7",
     "express": "^4.15.3",
     "extract-text-webpack-plugin": "^2.1.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "node-jsx": "^0.13.3",
     "normalize.css": "^7.0.0",
     "react": "^15.5.4",

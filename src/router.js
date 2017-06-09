@@ -6,7 +6,9 @@ import { Redirect }                   from 'react-router'
 import { connect }                    from 'react-redux'
 import CounterPage                    from './pages/CounterPage'
 import LoginPage                      from './pages/LoginPage'
+import PurchasePage                   from './pages/PurchasePage'
 import StyledLink                     from './components/Link'
+
 import 'normalize.css'
 
 const NoMatch =() => (<div>NoMatch</div>)
@@ -16,6 +18,7 @@ const LinksContainer = () => (<div>
   <StyledLink to="/home">home</StyledLink>
   <StyledLink to="/unknown">unknown</StyledLink>
   <StyledLink to="/login">login</StyledLink>
+  <StyledLink to="/purchase">purchase</StyledLink>
 </div>)
 
 const RedirectWithStatus = (props) => {
@@ -30,8 +33,9 @@ const isLogin = false
 const Router = ({token}) => (<div>
   <LinksContainer />
   <Switch>
-    <Route path="/home"     component={HomePage}    />
-    <Route path="/login"    component={LoginPage}   />
+    <Route path="/home"         component={HomePage}        />
+    <Route path="/login"        component={LoginPage}       />
+    
 
 
     {/* Protected Resouces */}

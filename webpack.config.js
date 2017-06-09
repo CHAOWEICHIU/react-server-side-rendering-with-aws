@@ -8,7 +8,16 @@ const webpack               = require('webpack')
 const mutualConfig = {
   entry: {
     bundle: './src/client.js',
-    vendor: [ 'superagent', 'react', 'react-dom', 'react-redux', 'redux', 'react-router-dom']
+    vendor: [
+      'superagent',
+      'react',
+      'react-dom',
+      'react-redux',
+      'redux',
+      'react-router-dom',
+      'moment',
+      'lodash'
+    ]
   },
   output: {
     path: path.resolve(__dirname, 'static'),

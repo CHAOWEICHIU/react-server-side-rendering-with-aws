@@ -10,6 +10,9 @@
 
 ## TODO list
   - WAIT
+    - [ ] CSS viewpoint
+    - [ ] [CSS](https://kknews.cc/tech/lzvr55e.html)
+    - [ ] Cal
     - [ ] Route
       - Styled Input
       - Login / Logout
