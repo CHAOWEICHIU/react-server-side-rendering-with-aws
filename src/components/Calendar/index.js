@@ -68,19 +68,21 @@ const almostFullDays = ['2017-06-05', '2017-06-07']
 class Calendar extends Component {
   constructor(props){
     super(props)
-
     this.state = {
-      displayDate           : timeNow.format('YYYY-MM-DD'),
-      activeDate            : '2017-06-06',
-      displayDates          : getDatesArr({
-                                date:timeNow.format('YYYY-MM'),
-                                active:'2017-06-06',
-                                fullDays,
-                                almostFullDays
-                              })
+      displayDate      : timeNow.format('YYYY-MM-DD'),
+      activeDate       : '2017-06-06',
+      displayDates     : getDatesArr({
+                          date:timeNow.format('YYYY-MM'),
+                          active:'2017-06-06',
+                          fullDays,
+                          almostFullDays
+                        })
     }
-    console.log(this.state);
-    this.upSwitch = this.upSwitch.bind(this)
+
+    this.upSwitch     = this.upSwitch.bind(this)
+    this.downSwitch   = this.downSwitch.bind(this)
+    this.onDateClick  = this.onDateClick.bind(this)
+
   }
   upSwitch(){
     let futureMonth = moment(this.state.displayDate).clone().add(1,'months')
@@ -91,6 +93,16 @@ class Calendar extends Component {
         active: this.state.activeDate,
         fullDays,
         almostFullDays,
+      })
+    })
+  }
+  onDateClick(date){
+    this.setState({
+      activeDate:date,
+      displayDates:this.state.displayDates.map(obj=>{
+        return obj.date == date
+          ? Object.assign({}, {...obj}, {active: true})
+          : Object.assign({}, {...obj}, {active: false})
       })
     })
   }
@@ -128,12 +140,10 @@ class Calendar extends Component {
             } else if (date.state == 'full'){
               return (<FullDayText key={`${index}_date`}>full:{date.displayDate}</FullDayText>)
             } else if (date.state == 'almostFull'){
-              return (<AlmostFullDayText key={`${index}_date`}>almost:{date.displayDate}</AlmostFullDayText>)
+              return (<AlmostFullDayText onClick={()=>this.onDateClick(date.date)} key={`${index}_date`}>almost:{date.displayDate}</AlmostFullDayText>)
             } else {
               return (<NopeDayText key={`${index}_date`}>{date.displayDate}</NopeDayText>)
             }
-
-
           })}
         </Bottom>
 
