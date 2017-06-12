@@ -40,7 +40,6 @@ const Router = ({token}) => (<div>
     <Route path="/calendar"       component={CalendarPage}        />
 
 
-
     {/* Protected Resouces */}
     <Route path="/counter"  component={()=>{
       return isLogin
