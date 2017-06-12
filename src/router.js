@@ -7,7 +7,9 @@ import { connect }                    from 'react-redux'
 import CounterPage                    from './pages/CounterPage'
 import LoginPage                      from './pages/LoginPage'
 import PurchasePage                   from './pages/PurchasePage'
+import CalendarPage                   from './pages/CalendarPage'
 import StyledLink                     from './components/Link'
+
 
 import 'normalize.css'
 
@@ -33,9 +35,10 @@ const isLogin = false
 const Router = ({token}) => (<div>
   <LinksContainer />
   <Switch>
-    <Route path="/home"         component={HomePage}        />
-    <Route path="/login"        component={LoginPage}       />
-    
+    <Route path="/home"           component={HomePage}            />
+    <Route path="/login"          component={LoginPage}           />
+    <Route path="/calendar"       component={CalendarPage}        />
+
 
 
     {/* Protected Resouces */}

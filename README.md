@@ -6,6 +6,12 @@
       /components/  => standalone and "pure" components
   /test/            => Endpoint Test    
 
+## Measurement
+```javascript
+  console.time('measure')
+  function(){...}
+  console.timeEnd('done')
+```
 
 ## Endpoint
   /products/:id
