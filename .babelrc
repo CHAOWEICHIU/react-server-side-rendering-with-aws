@@ -9,7 +9,10 @@
       "plugins" : [
         "transform-react-constant-elements",
         "transform-react-inline-elements",
-        "transform-runtime"
+        "transform-react-remove-prop-types",
+        "transform-react-remove-prop-types",
+        "transform-react-pure-class-to-function",
+        "transform-runtime",
       ]
     },
     "development": {
