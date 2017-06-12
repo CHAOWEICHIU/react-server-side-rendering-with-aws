@@ -42,6 +42,10 @@ const mutualConfig = {
       {name:'vendor', filename:'js/[name].[chunkhash].js', minChunks: Infinity}
     ),
     new ExtractTextPlugin('css/style.[chunkhash].css'),
+    new webpack.ContextReplacementPlugin(
+      /moment[\/\\]locale$/,
+      /zh-tw/
+    )
   ]
 }
 
