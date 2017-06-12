@@ -1,15 +1,27 @@
-import moment from 'moment'
-import _      from 'lodash'
+import getDatesArr from './'
 
+it('getDatesArr("2017-01")', ()=>{
+  expect(getDatesArr('2017-01').length).toBe(31)
+})
 
-const getDaysArrayByYearAndMonth = ({year, month}) => {
-  return _.range(1,moment(`${year}-${month}`).daysInMonth()+1)
-}
-
-it('getDaysArrayByYearAndMonth()', ()=>{
+it('getDatesArr("2017-02")', ()=>{
   expect(
-    getDaysArrayByYearAndMonth({ year:'2017', month:'01' })
-  ).toEqual(
-    _.range(1,32)
-  )
+    getDatesArr('2017-02').length
+  ).toBe(31)
+})
+it('getDatesArr("2017-03")', ()=>{
+  expect(
+    getDatesArr('2017-03').length
+  ).toBe(34)
+})
+it('getDatesArr("2017-04")', ()=>{
+  expect(
+    getDatesArr('2017-04').length
+  ).toBe(36)
+})
+it('getDatesArr("2017-04")', ()=>{
+  let actives = ['2017-04-01']
+  expect(
+    getDatesArr('2017-04').filter(i=>i.active).length
+  ).toBe(1)
 })

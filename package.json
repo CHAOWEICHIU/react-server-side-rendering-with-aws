@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "update:s3": "sh aws/sh/update.sh",
-    "watch:test": "jest --watch",
+    "watch:test": "NODE_ENV=development jest --watch",
     "watch:server": "BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon ./src/server.js --exec babel-node --plugins=css-modules-transform",
     "watch:client": "NODE_ENV=development webpack --watch",
     "watch:all": "npm run watch:client | npm run watch:server ",
