@@ -4,24 +4,37 @@ it('getDatesArr("2017-01")', ()=>{
   expect(getDatesArr('2017-01').length).toBe(31)
 })
 
-it('getDatesArr("2017-02")', ()=>{
+it('getDatesArr({date:"2017-02"})', ()=>{
   expect(
-    getDatesArr('2017-02').length
+    getDatesArr({date:'2017-02'}).length
   ).toBe(31)
 })
-it('getDatesArr("2017-03")', ()=>{
+it('getDatesArr({date:"2017-03"})', ()=>{
   expect(
-    getDatesArr('2017-03').length
+    getDatesArr({date:'2017-03'}).length
   ).toBe(34)
 })
-it('getDatesArr("2017-04")', ()=>{
+it('getDatesArr({date:"2017-04"})', ()=>{
   expect(
-    getDatesArr('2017-04').length
+    getDatesArr({date:'2017-04'}).length
   ).toBe(36)
 })
 it('getDatesArr("2017-04")', ()=>{
-  let actives = ['2017-04-01']
+  let input = getDatesArr({
+    date:'2017-04',
+    active: '2017-04-01',
+    fullDays:['2017-04-05','2017-04-06'],
+    almostFullDays: ['2017-05-07', '2017-04-03']
+  })
   expect(
-    getDatesArr('2017-04').filter(i=>i.active).length
+    input.filter(i=>i.active==true).length
+  ).toBe(1)
+
+  expect(
+    input.filter(i=>i.state =='full').length
+  ).toBe(2)
+
+  expect(
+    input.filter(i=>i.state =='almostFull').length
   ).toBe(1)
 })
