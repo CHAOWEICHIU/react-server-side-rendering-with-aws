@@ -111,8 +111,7 @@ class Calendar extends Component {
 }
 
 export default Calendar
-//width: ${(props)=>`${props.maxWidth / 10}vmin`};
-/* Style Component */
+
 const CalendarContainer = styled.div`
   background-color: #FFFFFF;
   border-radius:2%;
@@ -126,15 +125,15 @@ const CalendarContainer = styled.div`
   }
 `
 const Top = styled.div`
-  width:100%;
   display:flex;
   justify-content: space-between;
-  padding: 3vmin;
 `
+
+//width: ${props=>`${props.viewWidth / 10/10}vmin`};
+//height: ${props=>`${props.viewWidth / 10/10 -1.5}vmin`};
 const SwitchBtn = styled.div`
   background-color:#DCDCDC;
-  width: ${(props)=>`${props.maxWidth / 10/10}vmin`};
-  height: ${(props)=>`${props.maxWidth / 10/10 -1.5}vmin`};
+  width: ${props=>`${props.viewWidth*100}vw`};
   border-radius: 100%;
   font-size: ${(props)=>`${props.maxWidth / 10/10/2}vmin`};
   padding-top: 1.5vmin;
