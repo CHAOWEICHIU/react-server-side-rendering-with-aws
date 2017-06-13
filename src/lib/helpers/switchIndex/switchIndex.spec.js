@@ -1,6 +1,6 @@
 import switchIndex from './'
 
-it.only('pass with up', ()=>{
+it('pass with up', ()=>{
   expect(
     switchIndex({
       total:    5,
@@ -21,7 +21,7 @@ it('pass with donw', ()=>{
     switchIndex({
       total:    5,
       current:  0,
-      go:     'up',
+      go:     'down',
     })
   ).toBe(5)
   expect(
@@ -62,7 +62,7 @@ it('pass with total is 1', ()=>{
     })
   ).toBe(1)
 })
-it('pass with total is 1', ()=>{
+it('pass with total is 0', ()=>{
   expect(
     switchIndex({
       total:    0,
