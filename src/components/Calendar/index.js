@@ -9,6 +9,7 @@ const weekdaysArr = ['日', '一', '二', '三', '四', '五', '六']
 const timeNow = moment()
 const fullDays = ['2017-06-03', '2017-06-15']
 const almostFullDays = ['2017-06-05', '2017-06-07']
+const regularDays = ['2017-06-18','2017-06-19', '2017-06-11']
 
 class Calendar extends Component {
   constructor(props){
@@ -20,7 +21,8 @@ class Calendar extends Component {
                       date:timeNow.format('YYYY-MM'),
                       active:'2017-06-06',
                       fullDays,
-                      almostFullDays
+                      almostFullDays,
+                      regularDays,
                     })
     }
 
@@ -38,6 +40,7 @@ class Calendar extends Component {
         active: this.state.activeDate,
         fullDays,
         almostFullDays,
+        regularDays,
       })
     })
   }
@@ -62,6 +65,7 @@ class Calendar extends Component {
         active: this.state.activeDate,
         fullDays,
         almostFullDays,
+        regularDays,
       })
     })
   }
@@ -80,28 +84,30 @@ class Calendar extends Component {
     return (
       <CalendarContainer {...this.props}>
         <Top>
-          <SwitchBtn onClick={()=>upSwitch()}>{`<`}</SwitchBtn>
-            <div>
-              <div>year:{moment(displayDate).format('YYYY')}</div>
-              <div>month:{moment(displayDate).format('MM')}</div>
-            </div>
-          <SwitchBtn onClick={()=>downSwitch()}>{`>`}</SwitchBtn>
+          <TopSideBtn onClick={()=>downSwitch()}>{`<`}</TopSideBtn>
+            <TopMiddle>
+              <TopMiddleTitle>{moment(displayDate).format('YYYY')}</TopMiddleTitle>
+              <TopMiddleTitle>{moment(displayDate).format('MMM')}</TopMiddleTitle>
+            </TopMiddle>
+          <TopSideBtn onClick={()=>upSwitch()}>{`>`}</TopSideBtn>
         </Top>
-        <Bottom>
+        <Middle>
           {weekdaysArr.map((weekday,index)=>{
-            return (<DayText key={`${index}_weekday`}>{weekday}</DayText>)
+            return (<MiddleText key={`${index}_weekday`}>{weekday}</MiddleText>)
           })}
-        </Bottom>
+        </Middle>
         <Bottom>
           {this.state.displayDates.map((date,index)=>{
             if(date.active){
-              return (<ActiveDayText key={`${index}_date`}>{date.displayDate}</ActiveDayText>)
+              return (<ActiveCir {...this.props} key={`${index}_date`}>{date.displayDate}</ActiveCir>)
             } else if (date.state == 'full'){
-              return (<FullDayText key={`${index}_date`}>full:{date.displayDate}</FullDayText>)
+              return (<FullCir {...this.props} key={`${index}_date`}>{date.displayDate}<br/><span>額滿囉</span></FullCir>)
             } else if (date.state == 'almostFull'){
-              return (<AlmostFullDayText onClick={()=>onDateClick(date.date)} key={`${index}_date`}>almost:{date.displayDate}</AlmostFullDayText>)
+              return (<AlmostFullCir {...this.props} onClick={()=>onDateClick(date.date)} key={`${index}_date`}>{date.displayDate}<br/><span>剩x位</span></AlmostFullCir>)
+            } else if (date.state == 'regular') {
+              return (<RegularCir {...this.props} onClick={()=>onDateClick(date.date)} key={`${index}_date`}>{date.displayDate}</RegularCir>)
             } else {
-              return (<NopeDayText key={`${index}_date`}>{date.displayDate}</NopeDayText>)
+              return (<NopeCir {...this.props} key={`${index}_date`}>{date.displayDate}</NopeCir>)
             }
           })}
         </Bottom>
@@ -114,60 +120,113 @@ export default Calendar
 
 const CalendarContainer = styled.div`
   background-color: #FFFFFF;
-  border-radius:2%;
-  width:${props=>`${props.viewWidth*100}vw`};
+  width: ${props=>`${props.viewWidthRatioLg*100}vw`};
   display:flex;
   flex-direction: column;
-
-  @media (max-width: 500px) {
-    width: ${props=>`${props.viewWidthForMobile*100}vw`};
-    margin-left: ${props=>`${(100-props.viewWidthForMobile*100)/2}vw`};
+  flex-wrap:wrap;
+  border-radius: 3%;
+  padding: 20px;
+  @media (max-width: 1200px) {
+    width: ${props=>`${props.viewWidthRatioMd*100}vw`};
+  }
+  @media (max-width: 992px) {
+    width: ${props=>`${props.viewWidthRatioSm*100}vw`};
+  }
+  @media (max-width: 768px) {
+    width: ${props=>`${props.viewWidthRatioXs*100}vw`};
+    margin-left: ${props=>`${(100-props.viewWidthRatioXs*100)/2}vw`};
+    padding: 0;
   }
 `
 const Top = styled.div`
   display:flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  height:50px;
 `
-
-//width: ${props=>`${props.viewWidth / 10/10}vmin`};
-//height: ${props=>`${props.viewWidth / 10/10 -1.5}vmin`};
-const SwitchBtn = styled.div`
-  background-color:#DCDCDC;
-  width: ${props=>`${props.viewWidth*100}vw`};
+const TopSideBtn = styled.div`
+  padding-top:5px;
+  font-size:35px;
+  height: 35px;
+  width: 50px;
+  color:gray;
   border-radius: 100%;
-  font-size: ${(props)=>`${props.maxWidth / 10/10/2}vmin`};
-  padding-top: 1.5vmin;
   text-align:center;
 
   &:hover{
-    background-color: black;
     cursor: pointer;
-    color:white;
+    color:#6AC7E1;
   }
 `
-
+const TopMiddle = styled.div`
+  display:flex;
+  justify-content: center;
+`
+const TopMiddleTitle = styled.div`
+  margin: 5px 5px;
+  font-size:25px;
+  color: black;
+`
+const Middle = styled.div`
+  width: 100%;
+  margin: 10px 0;
+  display:flex;
+  justify-content:flex-start;
+  flex-direction:row;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+`
+const MiddleText = styled.div`
+  flex:1;
+  text-align:center;
+  color:#DCDCDC;
+  font-size: 20px;
+`
 const Bottom = styled.div`
   width: 100%;
-  background-color:pink;
   display:flex;
   justify-content:flex-start;
   flex-direction:row;
   flex-wrap: wrap;
 `
-const DayText = styled.div`
-  width: ${props=>`${(100/7)}%`};
-  text-align:center;
-  height:100px;
+const BottomCir = styled.div`
+  width: ${props=>`${props.viewWidthRatioLg*100/7}vw`};
+  height: ${props=>`${props.viewWidthRatioLg*100/7/5*3}vw`};
+  padding-top:${props=>`${props.viewWidthRatioLg*100/7/5*2}vw`};
   border-radius:100%;
+  text-align:center;
+
+  @media (max-width: 1200px) {
+    width: ${props=>`${props.viewWidthRatioMd*100/7}vw`};
+    height: ${props=>`${props.viewWidthRatioMd*100/7/5*3}vw`};
+    padding-top: ${props=>`${props.viewWidthRatioMd*100/7/5*2}vw`};
+  }
+  @media (max-width: 992px) {
+    width: ${props=>`${props.viewWidthRatioSm*100/7}vw`};
+    height: ${props=>`${props.viewWidthRatioSm*100/7/5*3}vw`};
+    padding-top: ${props=>`${props.viewWidthRatioSm*100/7/5*2}vw`};
+  }
+  @media (max-width: 768px) {
+    width: ${props=>`${props.viewWidthRatioXs*100/7}vw`};
+    height: ${props=>`${props.viewWidthRatioXs*100/7/5*3}vw`};
+    padding-top: ${props=>`${props.viewWidthRatioXs*100/7/5*2}vw`};
+  }
 `
-const ActiveDayText = styled(DayText)`
+const ActiveCir = styled(BottomCir)`
   color:white;
   background-color:#5BC0DE;
   &:hover{
     cursor:not-allowed;
   }
 `
-const AlmostFullDayText = styled(DayText)`
+const RegularCir = styled(BottomCir)`
+  color:#696969;
+  &:hover{
+    background-color:#5BC0DE;
+    color:white;
+    cursor:pointer;
+  }
+`
+const AlmostFullCir = styled(BottomCir)`
   color:#5BC0DE;
   background-color:white;
   &:hover{
@@ -175,17 +234,21 @@ const AlmostFullDayText = styled(DayText)`
     background-color:#5BC0DE;
     color:white;
   }
+  > span {
+    font-size: 12px;
+  }
 `
-const FullDayText = styled(DayText)`
+const FullCir = styled(BottomCir)`
   color:#FFA0A0;
-  background-color:green;
   &:hover{
     cursor:not-allowed;
   }
+  > span {
+    font-size: 12px;
+  }
 `
-const NopeDayText = styled(DayText)`
-  color:#696969;
-  background-color:gray;
+const NopeCir = styled(BottomCir)`
+  color:#DCDCDC;
   &:hover{
     cursor: not-allowed;
   }

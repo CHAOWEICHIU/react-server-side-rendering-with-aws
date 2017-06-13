@@ -5,7 +5,7 @@ const PurchasePageContainer = styled.div`
   width: 100%;
   display:flex;
   justify-content: center;
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     width: 100vw;
     flex-direction: column;
   }
@@ -15,7 +15,7 @@ const MessageContainer = styled.div`
   height: 30vw;
   background-color: gray;
 
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     width: 100vw;
   }
 `

@@ -176,6 +176,7 @@ describe('getDatesArr with other keys', ()=>{
       active: '2017-04-04',
       fullDays:['2017-04-05','2017-04-06'],
       almostFullDays: ['2017-05-07', '2017-04-03'],
+      regularDays: ['2017-08-01'],
     })
 
     expect(input[0]).toHaveProperty('date')
@@ -191,6 +192,7 @@ describe('getDatesArr with other keys', ()=>{
       active: '2017-04-04',
       fullDays:['2017-04-05','2017-04-06'],
       almostFullDays: ['2017-05-07', '2017-04-03'],
+      regularDays: ['2017-08-01'],
     })
     expect(
       input.filter(i=>i.active)[0].date
@@ -201,6 +203,9 @@ describe('getDatesArr with other keys', ()=>{
     expect(
       input.filter(i=>i.state=='almostFull').length
     ).toBe(1)
+    expect(
+      input.filter(i=>i.state=='regular').length
+    ).toBe(0)
   })
   it('return corresponding data (B)', ()=>{
     let input = getDatesArr({
@@ -208,6 +213,7 @@ describe('getDatesArr with other keys', ()=>{
       active: '2017-04-04',
       fullDays:['2017-04-05','2017-04-06'],
       almostFullDays: ['2017-05-07', '2017-04-03'],
+      regularDays: ['2017-08-01'],
     })
     expect(
       input.filter(i=>i.active).length
@@ -218,6 +224,9 @@ describe('getDatesArr with other keys', ()=>{
     expect(
       input.filter(i=>i.state=='almostFull').length
     ).toBe(0)
+    expect(
+      input.filter(i=>i.state=='regular').length
+    ).toBe(1)
   })
   it('return corresponding data (C)', ()=>{
     let input = getDatesArr({
@@ -225,6 +234,7 @@ describe('getDatesArr with other keys', ()=>{
       active: '2017-08-12',
       fullDays:['2017-08-15','2017-08-17','2017-09-20'],
       almostFullDays: ['2017-09-01', '2017-08-31', '2017-09-09'],
+      regularDays: ['2017-08-01'],
     })
     expect(
       input.filter(i=>i.active)[0].date
@@ -235,5 +245,8 @@ describe('getDatesArr with other keys', ()=>{
     expect(
       input.filter(i=>i.state=='almostFull').length
     ).toBe(2)
+    expect(
+      input.filter(i=>i.state=='regular').length
+    ).toBe(1)
   })
 })

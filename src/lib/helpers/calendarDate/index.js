@@ -2,7 +2,7 @@
 import moment from 'moment'
 import _      from 'lodash'
 
-const getDatesArr = ({date,active, fullDays, almostFullDays}) => {
+const getDatesArr = ({date,active, fullDays, almostFullDays, regularDays}) => {
   const inputTime = moment(date)
   const weekdayForFirstDayOfTheMonth = moment(inputTime).weekday()
   const weekdayForLastDayOfTheMonth = moment(moment(inputTime).clone().endOf('month')).weekday() + 1
@@ -54,6 +54,10 @@ const getDatesArr = ({date,active, fullDays, almostFullDays}) => {
         return !almostFullDays.find((day)=>day==obj.date)
           ? ({...obj})
           : Object.assign({},{...obj}, {state:'almostFull'})
+      }).map(obj=>{
+        return !regularDays.find((day)=>day==obj.date)
+          ? ({...obj})
+          : Object.assign({},{...obj}, {state:'regular'})
       })
 
 }
