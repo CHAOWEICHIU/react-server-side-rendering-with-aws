@@ -8,19 +8,19 @@ import CounterPage                    from './pages/CounterPage'
 import LoginPage                      from './pages/LoginPage'
 import PurchasePage                   from './pages/PurchasePage'
 import CalendarPage                   from './pages/CalendarPage'
+import SlidePage                      from './pages/SlidePage'
 import StyledLink                     from './components/Link'
 
 
 import 'normalize.css'
 
 const NoMatch =() => (<div>NoMatch</div>)
-const HomePage = () => (<div>Home!</div>)
 const LinksContainer = () => (<div>
-  <StyledLink to="/counter">counter</StyledLink>
-  <StyledLink to="/home">home</StyledLink>
-  <StyledLink to="/unknown">unknown</StyledLink>
-  <StyledLink to="/login">login</StyledLink>
-  <StyledLink to="/purchase">purchase</StyledLink>
+  <StyledLink to="/counter">CT</StyledLink>
+  <StyledLink to="/unknown">UN</StyledLink>
+  <StyledLink to="/login">LG</StyledLink>
+  <StyledLink to="/calendar">CA</StyledLink>
+  <StyledLink to="/slide">SL</StyledLink>
 </div>)
 
 const RedirectWithStatus = (props) => {
@@ -35,9 +35,9 @@ const isLogin = false
 const Router = ({token}) => (<div>
   <LinksContainer />
   <Switch>
-    <Route path="/home"           component={HomePage}            />
-    <Route path="/login"          component={LoginPage}           />
-    <Route path="/calendar"       component={CalendarPage}        />
+    <Route path="/login"          component={LoginPage}             />
+    <Route path="/calendar"       component={CalendarPage}          />
+    <Route path="/slide"          component={SlidePage}             />
 
 
     {/* Protected Resouces */}
