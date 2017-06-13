@@ -4,10 +4,14 @@ import styled from 'styled-components'
 class Slider extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      activeIndex:0
+    }
   }
   render(){
     return (<div>
-      Slider
+      <button>+</button>
+      <button>-</button>
     </div>)
   }
 }
