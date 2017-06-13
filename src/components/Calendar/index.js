@@ -2,7 +2,7 @@ import React, { Component }         from 'react'
 import styled                       from 'styled-components'
 import _                            from 'lodash'
 import moment                       from 'moment'
-import getDatesArr                  from '../../lib/helpers/cal'
+import getDatesArr                  from '../../lib/helpers/calendarDate'
 
 
 const weekdaysArr = ['日', '一', '二', '三', '四', '五', '六']
@@ -133,6 +133,7 @@ class Calendar extends Component {
             return (<DayText key={`${index}_weekday`}>{weekday}</DayText>)
           })}
         </Bottom>
+        {console.time('hi')}
         <Bottom>
           {this.state.displayDates.map((date,index)=>{
             if(date.active){
@@ -146,6 +147,7 @@ class Calendar extends Component {
             }
           })}
         </Bottom>
+        {console.timeEnd('hi')}
 
 
 
