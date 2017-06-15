@@ -97,6 +97,7 @@ const ImgContainer = styled.div`
 const SliderContainer = styled.div`
   position: relative;
   display:flex;
+  overflow:hidden;
 `
 
 const SwitchGeer = styled.div`

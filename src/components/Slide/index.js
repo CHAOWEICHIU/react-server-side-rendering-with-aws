@@ -102,4 +102,5 @@ const SlideImg = styled.img`
   position:absolute;
   height: 100%;
   z-index:10000;
+  box-shadow:0 0 22px 3px rgba(0,0,0,0.4);
 `
