@@ -81,7 +81,8 @@ class Slider extends Component {
     const { onClickDown, onClickUp, onPicDragStart, onPicDragOver } = this
     const { activeIndex, imgUrls } = this.state
     return (<SliderContainer>
-
+      <SwitchGeerRight onClick={()=>onClickUp()}></SwitchGeerRight>
+      <SwitchGeerLeft onClick={()=>onClickDown()}></SwitchGeerLeft>
       <ImgContainer>
         {this.state.imgUrls.map((url,i, all)=>{
           if(this.state.init){
