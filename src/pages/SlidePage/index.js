@@ -2,10 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import Slider from '../../components/Slider'
 const img1800x1000Urls = [
-  'https://www.happykeys.com/uploads/new_images/thumbs/1065_2_ca3.jpg',
-  'https://www.azamaraclubcruises.com/sites/default/files/heros/shanghai-china.jpg',
-  'https://madebysidecar.com/assets/products/thumbs/web-grid-img-1.jpg'
+  'https://d1f5je0f1yvok5.cloudfront.net/photo/9/g/I/9gI_QaOfoKN6fLbHL38Sew_o.jpg?v294',
+  'https://d1f5je0f1yvok5.cloudfront.net/photo/6/4/7/64755sy93IP,zheZUvOA4w_o.jpg?v294',
+  'https://d1f5je0f1yvok5.cloudfront.net/photo/n/F/B/nFBd9nSEsjXsNyWZPBV8WQ_o.jpg?v294',
+  'https://d1f5je0f1yvok5.cloudfront.net/photo/r/,/p/r,pf7vFllQPNrPBpFRFqsw_o.jpg?v294',
 ]
-const SlidePage = () => (<Slider imgs={img1800x1000Urls}/>)
+const SlidePage = () => (<div>
+  <Slider imgs={img1800x1000Urls}/>
+</div>)
 
 export default SlidePage

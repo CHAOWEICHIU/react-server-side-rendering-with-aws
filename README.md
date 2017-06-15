@@ -52,10 +52,32 @@
     }
 
 
+## CSS Animation
+
+```css
+.element {
+  transition: [property] [duration] [ease] [delay] ;
+}
+.example {
+  transition: opacity 300ms ease-in-out 1s;
+}
+.animationClass {
+  amination: [name] [duration] [timing-function] [delay] [iteration-count] [direction] [fill-mode] [play-state];
+}
+```
+
+- Things To Note
+  - position
+  - scale
+  - rotation
+  - opacity
+  # If you animate anything else, its at your own risk, and the chances are you are not going to hit a smooth 60fps
+
 
 ## TODO list
   - WAIT
-    - [ ] CSS viewpoint
+
+    - [ ] CSS Animation
     - [ ] [CSS](https://kknews.cc/tech/lzvr55e.html)
     - [ ] Cal
     - [ ] Route
@@ -83,6 +105,7 @@
     - [ ] Images For Server side
 
   - DONE
+    - [X] CSS viewpoint
     - [X] Boot up speed with React
       - [boost performance of your React app](https://www.youtube.com/watch?v=7lbhI80e-LA)
       - .balbelrc
