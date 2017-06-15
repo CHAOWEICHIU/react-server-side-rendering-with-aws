@@ -149,15 +149,15 @@ Resources:
                 Capabilities: CAPABILITY_NAMED_IAM
                 TemplatePath: 'Artifact::betaWeb.yml'
               RunOrder: 1
-            - Name: my-approval-action
-              ActionTypeId:
-                Category: Approval
-                Owner: AWS
-                Version: 1
-                Provider: Manual
-              InputArtifacts: []
-              OutputArtifacts: []
-              RunOrder: 2
+            # - Name: my-approval-action
+            #   ActionTypeId:
+            #     Category: Approval
+            #     Owner: AWS
+            #     Version: 1
+            #     Provider: Manual
+            #   InputArtifacts: []
+            #   OutputArtifacts: []
+            #   RunOrder: 2
             - Name: execute-changeset
               InputArtifacts: []
               OutputArtifacts: []
@@ -170,4 +170,4 @@ Resources:
                 StackName: !Sub '${EnvironmentName}-react-stack'
                 ActionMode: CHANGE_SET_EXECUTE
                 ChangeSetName: pipeline-changeset
-              RunOrder: 3
+              RunOrder: 2

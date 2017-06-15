@@ -17,7 +17,6 @@ import 'normalize.css'
 const NoMatch =() => (<div>NoMatch</div>)
 const LinksContainer = () => (<div>
   <StyledLink to="/counter">CT</StyledLink>
-  <StyledLink to="/unknown">UN</StyledLink>
   <StyledLink to="/login">LG</StyledLink>
   <StyledLink to="/calendar">CA</StyledLink>
   <StyledLink to="/slide">SL</StyledLink>
