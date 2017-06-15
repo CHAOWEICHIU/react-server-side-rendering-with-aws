@@ -12,9 +12,12 @@ class Slider extends Component {
       init: true,
       slideMoveTo:null,
       go: null,
+      startX: null,
     }
     this.onClickUp = this.onClickUp.bind(this)
     this.onClickDown = this.onClickDown.bind(this)
+    this.onPicDragStart = this.onPicDragStart.bind(this)
+    this.onPicDragOver = this.onPicDragOver.bind(this)
   }
   onClickUp(){
     let activeIndex = switchIndex({
@@ -42,17 +45,48 @@ class Slider extends Component {
       go:'up'
     })
   }
+  onPicDragStart(e){
+    console.log();
+    this.setState({startX:e.clientX})
+    // setState({})
+  }
+  onPicDragOver(e){
+    if(this.state.startX > e.clientX){
+      let activeIndex = switchIndex({
+        total: this.state.imgUrls.length - 1,
+        current: this.state.activeIndex,
+        go:'up',
+      })
+      this.setState({
+        activeIndex,
+        slideMoveTo:'left',
+        init:false,
+        go:'down'
+      })
+    } else {
+      let activeIndex = switchIndex({
+        total: this.state.imgUrls.length - 1,
+        current: this.state.activeIndex,
+        go:'down',
+      })
+      this.setState({
+        activeIndex,
+        slideMoveTo:'right',
+        init:false,
+        go:'up'
+      })
+    }
+  }
   render(){
-    const { onClickDown, onClickUp } = this
+    const { onClickDown, onClickUp, onPicDragStart, onPicDragOver } = this
     const { activeIndex, imgUrls } = this.state
     return (<SliderContainer>
-      <SwitchGeerRight onClick={()=>onClickUp()}></SwitchGeerRight>
-      <SwitchGeerLeft onClick={()=>onClickDown()}></SwitchGeerLeft>
+
       <ImgContainer>
         {this.state.imgUrls.map((url,i, all)=>{
           if(this.state.init){
             return i == activeIndex
-              ? (<Slide init={true} key={`${i}_slide`} url={url}/>)
+              ? (<Slide onDragStart={(e)=>onPicDragStart(e)} onDragOver={(e)=>onPicDragOver(e)}  init={true} key={`${i}_slide`} url={url}/>)
               : (<span key={`${i}_slide_hide` }/>)
           } else {
             let activeIndexForCurrent = switchIndex({
@@ -64,7 +98,10 @@ class Slider extends Component {
               ? (
                   [
                     <Slide                  moveTo={this.state.slideMoveTo}  url={all[activeIndexForCurrent]} key={`${i}_img_current`}  />,
-                    <Slide nextSlide={true} moveFrom={this.state.slideMoveTo} url={url} key={`${i}_img_next`}                            />,
+                    <Slide nextSlide={true}
+                      onDragStart={(e)=>onPicDragStart(e)}
+                      onDragOver={(e)=>onPicDragOver(e)}
+                      moveFrom={this.state.slideMoveTo} url={url} key={`${i}_img_next`}                            />,
                   ]
                 )
               : (<span key={`${i}_slide_hide` }/>)
@@ -139,3 +176,7 @@ const ActiveCirIndex = styled(CirIndex)`
   background-color: white;
   opacity: 1;
 `
+/*
+<SwitchGeerRight onClick={()=>onClickUp()}></SwitchGeerRight>
+<SwitchGeerLeft onClick={()=>onClickDown()}></SwitchGeerLeft>
+*/
