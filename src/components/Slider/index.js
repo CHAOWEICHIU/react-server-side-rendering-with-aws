@@ -130,6 +130,9 @@ const ImgContainer = styled.div`
   display:flex;
   width:200vw;
   height: 50vh;
+  @media (max-width: 768px) {
+    width:100vw;
+  }
 `
 
 const SliderContainer = styled.div`
@@ -180,7 +183,3 @@ const ActiveCirIndex = styled(CirIndex)`
   background-color: white;
   opacity: 1;
 `
-/*
-<SwitchGeerRight onClick={()=>onClickUp()}></SwitchGeerRight>
-<SwitchGeerLeft onClick={()=>onClickDown()}></SwitchGeerLeft>
-*/

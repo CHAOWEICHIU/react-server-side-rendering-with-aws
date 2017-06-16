@@ -86,6 +86,9 @@ const SlideContainer = styled.div`
     }
 
   }} 1s ease-in-out forwards;
+  @media (max-width: 768px) {
+    transform:translate(0);
+  }
 `
 
 const SlideBackground = styled.div`
