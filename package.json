@@ -12,6 +12,7 @@
     "watch:all": "npm run watch:client | npm run watch:server ",
     "build": "rimraf static && NODE_ENV=production webpack -p",
     "line:message": "node ./aws/line_message/send.js",
+    "line:message:serve": "node ./aws/line_message/serve.js",
     "serve": "BABEL_DISABLE_CACHE=1 NODE_ENV=production forever start -c babel-node ./src/server.js --plugins=css-modules-transform",
     "go": "npm run build && open http://localhost:5678 | PORT=5678 npm run serve"
   },
