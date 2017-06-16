@@ -9,6 +9,7 @@ import LoginPage                      from './pages/LoginPage'
 import PurchasePage                   from './pages/PurchasePage'
 import CalendarPage                   from './pages/CalendarPage'
 import SlidePage                      from './pages/SlidePage'
+import SwipePage                      from './pages/SwipePage'
 import StyledLink                     from './components/Link'
 
 
@@ -20,6 +21,7 @@ const LinksContainer = () => (<div>
   <StyledLink to="/login">LG</StyledLink>
   <StyledLink to="/calendar">CA</StyledLink>
   <StyledLink to="/slide">SL</StyledLink>
+  <StyledLink to="/swipe">SW</StyledLink>
 </div>)
 
 const RedirectWithStatus = (props) => {
@@ -37,6 +39,7 @@ const Router = ({token}) => (<div>
     <Route path="/login"          component={LoginPage}             />
     <Route path="/calendar"       component={CalendarPage}          />
     <Route path="/slide"          component={SlidePage}             />
+    <Route path="/swipe"          component={SwipePage}             />
 
 
     {/* Protected Resouces */}
