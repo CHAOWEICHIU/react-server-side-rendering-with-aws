@@ -8,14 +8,10 @@ phases:
       - npm install
   pre_build:
     commands:
-      - npm run line:message "Prepare To Build!"
       - npm run test
-  build:
-    commands:
-      - npm run build
   post_build:
     commands:
-      - npm run line:message "Done With Build For r-r2"
+      - npm run line:message "Done With Post_build"
 artifacts:
   files:
     - './aws/Cloudformation/betaWeb.yml'

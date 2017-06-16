@@ -65,10 +65,6 @@ Resources:
             - |
               cd app
             - |
-              sudo npm install
-            - |
-              sudo npm run build
-            - |
               sudo npm run serve &
 Parameters:
   KeyNameYo:
