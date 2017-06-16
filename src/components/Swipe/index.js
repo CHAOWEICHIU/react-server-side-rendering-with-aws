@@ -32,7 +32,11 @@ class Swipe extends Component {
       <div>Tap: {this.state.handleTap.toString()}</div>
       <div>swipe: {this.state.handleSwipe.toString()}</div>
       <div></div>
-      <Hammer onTap={handleTap} onSwipe={handleSwipe}><AreaForTouch>Tap Me</AreaForTouch></Hammer>
+      <Hammer
+        onTap={handleTap}
+        onSwipe={handleSwipe}>
+          <AreaForTouch></AreaForTouch>
+      </Hammer>
     </div>)
 
   }
