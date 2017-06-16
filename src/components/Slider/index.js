@@ -150,6 +150,9 @@ const SwitchGeer = styled.div`
     opacity: 0.5;
     cursor: pointer;
   }
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 const SwitchGeerLeft = styled(SwitchGeer)`
   left:0;
